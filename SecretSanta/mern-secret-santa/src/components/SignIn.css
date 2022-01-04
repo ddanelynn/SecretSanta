@@ -54,6 +54,11 @@
     position: absolute;
     margin-right: 0;
   }
+  .fail-text {
+    font-size: small;
+    margin-right: 0;
+    color: #DC594F;
+  }
   a {
     color: #DC594F;
     text-decoration: none;
