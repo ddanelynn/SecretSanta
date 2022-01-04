@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const wishlistSchema = new Schema({
   owner: {
+      // owner user id
         type: Schema.Types.ObjectId,
         ref: 'User',
   },
