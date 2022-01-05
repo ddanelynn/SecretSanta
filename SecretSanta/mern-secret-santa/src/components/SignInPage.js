@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import './SignIn.css';
 import axios from 'axios';
+import UserActions from '../reducers/UserReducer'
 
-export const SignInPage = () => {
+
+// TODO: validation of password
+export const SignInPage = (props) => {
+    const { userRequest } = props
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [authFail, setAuthFail] = useState(false)
@@ -18,7 +24,11 @@ export const SignInPage = () => {
       }
   
       axios.post('http://localhost:5000/users/authenticate', user)
-        .then(res => { navigate('/home') })
+        .then((res) => { 
+          console.log(res.data)
+          navigate('/profile')
+          userRequest(res.data)
+        })
         .catch((err) => setAuthFail(true));
   
     }
@@ -65,4 +75,8 @@ export const SignInPage = () => {
     </div>
   );
 };
-export default SignInPage;
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Object.assign(UserActions), dispatch);
+
+export default connect(null, mapDispatchToProps)(SignInPage);

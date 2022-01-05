@@ -3,6 +3,8 @@ import './SignIn.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
+//TODO: ensure unique username and fields are all filled in
 export const SignUpPage = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')

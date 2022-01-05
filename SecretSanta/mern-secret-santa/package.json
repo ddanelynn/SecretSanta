@@ -10,9 +10,14 @@
     "bootstrap": "^3.4.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.0",
+    "react-calendar": "^3.5.0",
     "react-dom": "^17.0.2",
+    "react-modal": "^3.14.4",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "reduxsauce": "^1.2.1",
+    "seamless-immutable": "^7.1.4",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
