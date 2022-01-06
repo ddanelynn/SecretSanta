@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import "./Profile.css";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Modal from "react-modal";
+import Editable from "./Editable";
+import { ListItem } from "./ListItem";
 
 //TODO: Make title editable and add save list button
 function ProfilePage(props) {
   const { userData } = props;
-  const { username } = userData || {};
+  const { username, _id } = userData || {};
   const [showModal, setShowModal] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [title, setTitle] = useState("");
@@ -39,12 +42,35 @@ function ProfilePage(props) {
     }
   };
 
+  const editItem = (item, indx) => {
+      const temp = items;
+      items[indx] = item;
+      setItems(temp);
+  }
+
   const addItemToList = () => {
     let temp = items;
     temp = [...items, newItem];
     setItems(temp);
     setNewItem("");
   };
+
+  const onSaveWishList = () => {
+      console.log(items)
+      console.log(_id)
+      const wishlist = {
+        title: title,
+        items: items,
+        owner: _id,
+      }
+  
+      axios.post('http://localhost:5000/wishlists/add', wishlist)
+        .then(res => { 
+          console.log('yay wihslist added!')
+          setShowModal(false)
+        });
+  
+  }
 
   return (
     <div className="profile-page">
@@ -55,8 +81,8 @@ function ProfilePage(props) {
             content: {
               position: "absolute",
               top: "80px",
-              left: "80px",
-              right: "80px",
+              left: "150px",
+              right: "150px",
               bottom: "80px",
               border: "0px",
               background: "#F3F6ED",
@@ -73,23 +99,21 @@ function ProfilePage(props) {
           // style={customStyles}
           // contentLabel="Example Modal"
         >
-          {title.length === 0 ? (
+          <Editable style={{ marginBottom: 50 }} text={title} placeholder="Title of Wishlist" type="input" defaultEditable size="large">
             <input
               className="wishlist-input"
               type="text"
               name="title"
               placeholder="Title of Wishlist"
               onKeyDown={(e) => handleKeyDown(e)}
-              //onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
             />
-          ) : (
-            <div className="wishlist-title">{title}</div>
-          )}
+          </Editable>
           <ul style={{ padding: 0 }}>
             {items.map((item, index) => (
-                <div>
-              <div className="list-item" key={index}>{item}</div>
-              <hr/>
+              <div key={index}>
+                <ListItem itemName={item} indx={index} editItem={editItem}/>
               </div>
             ))}
           </ul>
@@ -108,15 +132,16 @@ function ProfilePage(props) {
                 onKeyDown={(e) => handleNewItem(e)}
               />
               <div>
-              <button className="add-btn" onClick={addItemToList}>
-                Add
-              </button>
-              <button className="add-btn" onClick={() => setShowInput(false)}>
-                Cancel
-              </button>
+                <button className="add-btn" onClick={addItemToList}>
+                  Add
+                </button>
+                <button className="add-btn" onClick={() => setShowInput(false)}>
+                  Cancel
+                </button>
               </div>
             </div>
           )}
+          <button className="save-btn" onClick={() => onSaveWishList()}>Save Wishlist!</button>
         </Modal>
         <div>
           <div className="header-text">Hi, {username}!</div>

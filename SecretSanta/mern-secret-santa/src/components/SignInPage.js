@@ -48,7 +48,7 @@ export const SignInPage = (props) => {
     <div className="first-page">
       <div className="signup-box">
         <div className="welcome-text">Welcome Back!</div>
-        { authFail && <div className="fail-text">Incorrect email or password!</div> }
+        { authFail && <div className="fail-text">Incorrect username or password!</div> }
         <form onSubmit={onSubmit}>
           <div className="form">
             <input
