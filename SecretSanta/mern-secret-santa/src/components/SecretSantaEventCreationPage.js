@@ -50,7 +50,7 @@ export const SecretSantaEventCreationPage = () => {
         const friendsBlock = [];
         for (const [index, value] of friends.entries()) {
             friendsBlock.push(
-                <div className="friend">
+                <div className="friend" key={index}>
                     <div className="friend-name">{value}</div>
                     <div className="friend-list-button" onClick={() => addFriend(value)}>Add</div>
                 </div>
@@ -95,15 +95,15 @@ export const SecretSantaEventCreationPage = () => {
                     />
                 </div>
             </div>
-            <div className="field-row">
+            <div className="field-row fixed-row-width">
                 <div className="big-field-block">
                     <div className="field-label">
-                        Friends
+                        Participants
                         <span><FontAwesomeIcon className="add-icon" icon={faPlus} color="#F3F6ED" onClick={handleFriendList}/></span>
                     </div>
-                    <div className="big-input" id="friend-input-block">
-                        <FriendList/>
+                    <div className="big-input" id="friend-input-block">  
                     </div>
+                    <FriendList/>
                 </div>
             </div> 
             <div className="add-event-button" onClick={onAddEvent}>Add Event</div> 

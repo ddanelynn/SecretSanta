@@ -59,7 +59,7 @@ export const BirthdayEventCreationPage = () => {
         const friendsBlock = [];
         for (const [index, value] of friends.entries()) {
             friendsBlock.push(
-                <div className="friend">
+                <div className="friend" key={index}>
                     <div className="friend-name">{value}</div>
                     <div className="friend-list-button" onClick={() => addFriend(value)}>Add</div>
                 </div>

@@ -22,13 +22,14 @@ function App() {
       <Router>
           {/* <Navbar /> */}
           <Routes>
-          <Route path="/create/secret-santa" exact element={<SecretSantaEventCreationPage/>} />
           <Route path="/" exact element={<SignInPage/>} />
           <Route path="/events" exact element={<EventCreationPage/>} />
           <Route path="/sign-up" exact element={<SignUpPage/>} />
           <Route path="/home" exact element={<HomePage/>} />
           <Route path="/profile" exact element={<ProfilePage/>} />
           <Route path="/wishlist" exact element={<WishlistPage/>} />
+          <Route path="/create/secret-santa" exact element={<SecretSantaEventCreationPage/>} />
+          <Route path="/create/birthday" exact element={<BirthdayEventCreationPage/>} />
           </Routes>
       </Router>
       </Provider>

@@ -28,7 +28,7 @@
 }
 
 .input {
-    width: fit-content;
+    width: 280px;
 }
 
 .input:focus {
@@ -61,6 +61,7 @@ input {
     border-radius: 5px;
     background-color: #F3F6ED;
     color: #6A7A60;
+    width: 280px;
 }
 
 input:focus {
@@ -91,6 +92,7 @@ input:focus {
     background-color: #A02B31;
     border-radius: 10px;
     margin-top: 40px;
+    cursor: pointer;
 }
 
 .add-icon {
@@ -159,4 +161,9 @@ input:focus {
 
 .friend-name {
     color: #F3F6ED;
+}
+
+.fixed-row-width {
+    justify-content: flex-start;
+    width: 680px;
 }
