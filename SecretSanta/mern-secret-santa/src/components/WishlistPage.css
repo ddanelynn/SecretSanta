@@ -15,7 +15,7 @@
     color: white;
     font-size: x-large;
   }
-  .wishlist-container {
+  .wishlist-items-container {
     background-color: #f3f6ed;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -30,6 +30,9 @@
     scroll-behavior: smooth;
     overflow: scroll;
     scrollbar-width: none;
+  }
+  .wishlist-items-container::-webkit-scrollbar {
+    display: none;
   }
   .wishlist-item-element {
     text-align: start;
@@ -68,4 +71,17 @@
 .saved-indicator {
   color:#dc594f;
   margin-right: 15px;
+}
+.back-btn {
+  margin-top: 30px;
+  padding: 0;
+  border: none;
+  background-color: #f1b7b5;
+  justify-content: start;
+  display: flex;
+  cursor: pointer;
+}
+.back-image {
+  width: 2%;
+  height: 80%;
 }

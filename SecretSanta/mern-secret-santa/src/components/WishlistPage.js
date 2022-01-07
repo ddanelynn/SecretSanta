@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import SelectedlistActions from "../reducers/SelectedlistReducer";
@@ -9,7 +9,9 @@ import "./WishlistPage.css";
 import { ListItem } from "./ListItem";
 import Editable from "./Editable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from 'react-router-dom';
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import backArrow from '../assets/back-arrow.png'
 
 function WishlistPage(props) {
   const { state } = useLocation();
@@ -22,6 +24,7 @@ function WishlistPage(props) {
   const [newItem, setNewItem] = useState("");
   const [saving, setSaving] = useState(false);
   const [showSaved, setShowSaved] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -79,6 +82,9 @@ function WishlistPage(props) {
     setEditing(true);
   };
 
+  const onGoBack = () => {
+    navigate("/profile")
+  }
   const saveEdits = () => {
     const wishlist = {
       title: editedTitle,
@@ -100,6 +106,9 @@ function WishlistPage(props) {
     <div className="wishlist-container">
       <Navbar />
       <div className="wishlist-page">
+        <button className="back-btn" onClick={() => onGoBack()}>
+        <img className="back-image" src={backArrow}/>
+        </button>
         {isEditing ? (
           <div className="item-line">
             <Editable
@@ -135,7 +144,7 @@ function WishlistPage(props) {
             )}
           </div>
         )}
-        <div className="wishlists-container">
+        <div className="wishlist-items-container">
           <ul style={{ padding: 0 }}>
             {editedItems &&
               editedItems.map((item, index) =>
