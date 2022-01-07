@@ -5,33 +5,23 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Select from 'react-select';
 
 export const BirthdayEventCreationPage = () => {
 
     const [eventDate, setEventDate] = useState(new Date());
     const [venue, setVenue] = useState("");
-    const [wishlist, setWishlist] = useState([]);
+    const [wishlist, setWishlist] = useState();
     const [friends, setFriends] = useState([]);
 
     const navigate = useNavigate();
     const onAddEvent = () => {
         // connect to backend, send 4 variables in useState
-        const items = document.querySelectorAll('wishlist-item');
-        const wishlistArr = [];
-        items.forEach((item) => {
-            wishlistArr.push(item.id);
-        });
-        setWishlist(wishlistArr);
+    
     }
-    const addWishlist = () => {
-        const wishlistBlock = document.getElementById('wishlist-input-block');
-        const newItem = document.createElement('input');
-        newItem.setAttribute('placeholder', "Key in your item")
-        newItem.setAttribute('class', 'wishlist-item');
-        newItem.addEventListener('input', (e) => {
-            e.target.id = e.target.value
-        });
-        wishlistBlock.appendChild(newItem);
+    const handleSelectWishlist = (selectedOption) => {
+        setWishlist(selectedOption.value)
+        console.log(wishlist)
     }
     const handleFriendList = () => {
         const friendList = document.querySelector('.friends-list');
@@ -80,6 +70,13 @@ export const BirthdayEventCreationPage = () => {
             )
         }
     }
+    // get wishlist from backend
+    const myWishlists = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ];
+    
 
     return (
         <div className="birthday-event-creation-container">
@@ -108,9 +105,9 @@ export const BirthdayEventCreationPage = () => {
                 <div className="big-field-block">
                     <div className="field-label">
                         Wishlist
-                        <span><FontAwesomeIcon className="add-icon" icon={faPlus} color="#F3F6ED" onClick={addWishlist}/></span>
                     </div>
-                    <div className="big-input" id="wishlist-input-block"></div>
+                    <Select options={myWishlists} 
+                            onChange={handleSelectWishlist}/>
                 </div>
                 <div className="big-field-block">
                     <div className="field-label">
