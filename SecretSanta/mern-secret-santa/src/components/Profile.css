@@ -36,6 +36,13 @@
   margin-top: 20px;
   margin-bottom: 50px;
   width: 700px;
+  max-height: 400px;
+  scroll-behavior: smooth;
+  overflow: scroll;
+  scrollbar-width: none;
+}
+.wishlists-container::-webkit-scrollbar {
+    display: none;
 }
 .add-wishlist-btn {
   border-width: 0;
@@ -131,4 +138,18 @@
 
 .nav-icons:hover {
     border-bottom: 4px solid #fff;
+}
+
+.wishlist-item {
+    text-align: start;
+    margin-bottom: 15px;
+}
+.wishlist-item-btn {
+    flex-direction: row;
+    display: flex;
+    margin-bottom: 15px;
+    border: none;
+    background-color: #f3f6ed;
+    cursor: pointer;
+    font-size: medium;
 }
