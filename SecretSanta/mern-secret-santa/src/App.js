@@ -9,6 +9,7 @@ import { EventCreationPage } from "./components/EventCreationPage";
 import { BirthdayEventCreationPage } from "./components/BirthdayEventCreationPage";
 import ProfilePage from "./components/ProfilePage";
 import reducers from "./constants/Reducers";
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const store = createStore(reducers);
