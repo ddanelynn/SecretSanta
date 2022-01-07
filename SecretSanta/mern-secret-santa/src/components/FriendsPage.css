@@ -1,0 +1,65 @@
+.page-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+.friends-page {
+    background-color: #F3F6ED;
+    height: 100%;
+    display: flex;
+}
+
+.friends-left-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.friendsContainer {
+    border-radius: 6px;
+    background-color: white;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.centerText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBarContainer {
+    display: flex;
+    margin: 1rem;
+}
+.card-mini-header {
+    font-weight: bold;
+}
+
+.maxWidth {
+    width: 100%;
+}
+
+.profileDetails {
+    display: flex;
+    min-width: 30%;
+}
+
+.friendNotSelectedContainer {
+    text-align: center;
+}
+
+.friend-item-element {
+    margin-bottom: 15px;
+}
+
+.friend-item-btn {
+    flex-direction: row;
+    display: flex;
+    border: none;
+    background-color: #ffff;
+    cursor: pointer;
+    font-size: medium;
+    padding: 0;
+}
