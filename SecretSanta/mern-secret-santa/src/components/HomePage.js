@@ -22,6 +22,22 @@ export const HomePage = () => {
             date: "20", 
             month: "March"
         },
+        {
+            name: "Jerry's Christmas", 
+            creator: "JerryBerries", 
+            participants: ["berry", "Tom", "JerryTriplet"], 
+            joinStatus: true, 
+            date: "20", 
+            month: "March"
+        },
+        {
+            name: "Jerry's Christmas", 
+            creator: "JerryBerries", 
+            participants: ["berry", "Tom", "JerryTriplet"], 
+            joinStatus: true, 
+            date: "20", 
+            month: "March"
+        },
     ]
 
     const eventCards = [];
@@ -35,7 +51,12 @@ export const HomePage = () => {
     return (
         <div className="feed-page-container">
             <Navbar />
-            {eventCards}
+            <div className="feed-page-content">
+                <div className="event-card-wrapper">
+                    {eventCards}
+                </div>
+                <div className="create-event-button">Create an Event</div>
+            </div>
         </div>
     )
 }
