@@ -7,9 +7,9 @@ import SelectedlistActions from "../reducers/SelectedlistReducer";
 import { Navbar } from "./Navbar";
 import "./WishlistPage.css";
 import { ListItem } from "./ListItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Editable from "./Editable";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 function WishlistPage(props) {
   const { state } = useLocation();
@@ -20,6 +20,8 @@ function WishlistPage(props) {
   const [editedItems, setEditedItems] = useState([]);
   const [isEditing, setEditing] = useState(false);
   const [newItem, setNewItem] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [showSaved, setShowSaved] = useState(false);
 
   useEffect(() => {
     axios
@@ -28,7 +30,7 @@ function WishlistPage(props) {
         selectedlistRequest(res.data);
       })
       .catch((err) => console.log(err));
-  }, [wishlist]);
+  }, []);
 
   useEffect(() => {
     setEditedTitle(title);
@@ -40,38 +42,12 @@ function WishlistPage(props) {
   const editItem = (item, index) => {
     let temp = editedItems;
     temp[index] = item;
-    setEditedItems(temp);
-    const wishlist = {
-      title: editedTitle,
-      items: temp,
-      owner: owner,
-    };
-
-    axios
-      .post(`http://localhost:5000/wishlists/update/${list_id}`, wishlist)
-      .then((res) => {
-        console.log("yay wihslist added!");
-      })
-      .catch((err) => console.log(err));
+    setEditedItems((editedItems) => editedItems.map((curr, i) => i === index ? item : curr));
   };
 
   const deleteItem = (indx) => {
-    console.log(indx);
     // console.log(items.filter((_, i) => i !== indx));
-    const temp = editedItems.filter((_, i) => i !== indx);
-    const wishlist = {
-      title: editedTitle,
-      items: temp,
-      owner: owner,
-    };
-
-    console.log(list_id);
-    axios
-      .post(`http://localhost:5000/wishlists/update/${list_id}`, wishlist)
-      .then((res) => {
-        console.log("yay wihslist edited!");
-      })
-      .catch((err) => console.log(err));
+    setEditedItems((editedItems) => editedItems.filter((_, i) => i !== indx));
   };
 
   const handleNewItem = (event) => {
@@ -87,41 +63,76 @@ function WishlistPage(props) {
     setNewItem("");
   };
 
-  console.log(editedItems);
-  //console.log(editedTitle)
+  const hideSaved = () => {
+    setShowSaved(false);
+  };
+
+  const stopLoading = () => {
+    setSaving(false);
+    setEditing(false);
+    setShowSaved(true);
+    setTimeout(hideSaved, 1500);
+  };
+
+  const editList = () => {
+    setShowSaved(false);
+    setEditing(true);
+  };
+
+  const saveEdits = () => {
+    const wishlist = {
+      title: editedTitle,
+      items: editedItems,
+      owner: owner,
+    };
+
+    axios
+      .post(`http://localhost:5000/wishlists/update/${list_id}`, wishlist)
+      .then((res) => {
+        console.log("yay wihslist added!");
+        setSaving(true);
+        setTimeout(stopLoading, 1500);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="wishlist-container">
       <Navbar />
       <div className="wishlist-page">
         {isEditing ? (
-           <div className="item-line">
-          <Editable
-            text={editedTitle}
-            placeholder={editedTitle}
-            type="input"
-            defaultEditable
-            size="large"
-            color="white"
-          >
-            <input
-              className="wishlist-input-edit"
-              type="text"
-              name="title"
+          <div className="item-line">
+            <Editable
+              text={editedTitle}
               placeholder={editedTitle}
-              value={editedTitle}
-              onChange={(e) => setEditedTitle(e.target.value)}
-            />
-          </Editable>
-          <button className="add-btn" onClick={() => setEditing(false)}>
-              Save
+              type="input"
+              defaultEditable
+              size="large"
+              color="white"
+            >
+              <input
+                className="wishlist-input-edit"
+                type="text"
+                name="title"
+                placeholder={editedTitle}
+                value={editedTitle}
+                onChange={(e) => setEditedTitle(e.target.value)}
+              />
+            </Editable>
+            <button className="add-btn" onClick={() => saveEdits()}>
+              {saving ? <div>Saving...</div> : <div>Save</div>}
             </button>
           </div>
         ) : (
           <div className="item-line">
             <div className="list-header-text">{title}</div>
-            <button className="add-btn" onClick={() => setEditing(true)}>
-              Edit
-            </button>
+            {showSaved ? (
+              <div className="saved-indicator">Saved!<FontAwesomeIcon icon={faCheckCircle} style={{ marginLeft: 10}}/></div>
+            ) : (
+              <button className="add-btn" onClick={() => editList()}>
+                Edit
+              </button>
+            )}
           </div>
         )}
         <div className="wishlists-container">
@@ -147,7 +158,7 @@ function WishlistPage(props) {
           {isEditing && (
             <div>
               <input
-                style={{ marginTop: 40 }}
+                style={{ marginTop: 40, marginBottom: 15 }}
                 className="wishlist-input"
                 type="text"
                 name="item"
@@ -156,7 +167,7 @@ function WishlistPage(props) {
                 onChange={(e) => setNewItem(e.target.value)}
                 onKeyDown={(e) => handleNewItem(e)}
               />
-              <button className="add-btn" onClick={() => addNewItem()}>
+              <button className="add-btn" onClick={() => addNewItem()} style={{ marginLeft: -640 }}>
                 Add
               </button>
             </div>
