@@ -9,6 +9,7 @@ import Editable from "./Editable";
 import { ListItem } from "./ListItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Navbar } from "./Navbar";
 
 //TODO: Make title editable and add save list button
 function ProfilePage(props) {
@@ -88,6 +89,8 @@ function ProfilePage(props) {
   };
 
   return (
+    <div className="page-container">
+      <Navbar/>
     <div className="profile-page">
       <div className="top-section">
         <Modal
@@ -195,6 +198,7 @@ function ProfilePage(props) {
           <Calendar />
         </div>
       </div>
+    </div>
     </div>
   );
 }
