@@ -13,6 +13,7 @@ export const BirthdayEventCreationPage = () => {
     const [venue, setVenue] = useState("");
     const [wishlist, setWishlist] = useState();
     const [friends, setFriends] = useState([]);
+    const [name, setName] = useState("");
 
     const navigate = useNavigate();
     const onAddEvent = () => {
@@ -82,6 +83,16 @@ export const BirthdayEventCreationPage = () => {
         <div className="birthday-event-creation-container">
             <div className="field-row">
                 <div className="field-block">
+                    <div className="field-label">Name</div>
+                    <input
+                        className="input"
+                        type="text"
+                        name="name"
+                        placeholder="Event Name"
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className="field-block">
                     <div className="field-label">Date and Time</div>
                     <DatePicker 
                         selected={eventDate} 
@@ -90,24 +101,26 @@ export const BirthdayEventCreationPage = () => {
                         dateFormat="Pp"
                     />
                 </div>
-                <div className="field-block">
-                    <div className="field-label">Venue</div>
-                    <input
-                        className="input"
-                        type="text"
-                        name="venue"
-                        placeholder="Venue"
-                        onChange={(e) => setVenue(e.target.value)}
-                    />
-                </div>
             </div>
             <div className="field-row">
-                <div className="big-field-block">
-                    <div className="field-label">
-                        Wishlist
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <div className="field-block">
+                        <div className="field-label">Venue</div>
+                        <input
+                            className="input"
+                            type="text"
+                            name="venue"
+                            placeholder="Venue"
+                            onChange={(e) => setVenue(e.target.value)}
+                        />
                     </div>
-                    <Select options={myWishlists} 
-                            onChange={handleSelectWishlist}/>
+                    <div className="big-field-block">
+                        <div className="field-label">
+                            Wishlist
+                        </div>
+                        <Select options={myWishlists} 
+                                onChange={handleSelectWishlist}/>
+                    </div>
                 </div>
                 <div className="big-field-block">
                     <div className="field-label">
