@@ -12,12 +12,16 @@ router.route('/add').post((req, res) => {
   const venue = req.body.venue;
   const date = Date.parse(req.body.date);
   const guests = req.body.guests;
+  const category = req.body.category;
+  const name = req.body.name;
 
   const newEvent = new Event({
+    name,
     owner,
     venue,
     guests,
     date,
+    category,
   });
 
   newEvent.save()

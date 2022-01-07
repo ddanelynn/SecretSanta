@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import "./BirthdayEventCreation.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,11 +11,12 @@ import Select from "react-select";
 
 function BirthdayEventCreationPage(props) {
   const { userLists, userData } = props;
-  const { _id } = props;
+  const { _id } = userData;
   const [eventDate, setEventDate] = useState(new Date());
   const [venue, setVenue] = useState("");
   const [wishlist, setWishlist] = useState();
   const [friends, setFriends] = useState([]);
+  const [name, setName] = useState("");
   const [userWishlists, setUserWishlists] = useState([]);
 
   const navigate = useNavigate();
@@ -30,12 +32,19 @@ function BirthdayEventCreationPage(props) {
   const onAddEvent = () => {
     const event = {
         owner: _id,
+        name: name,
         venue: venue,
         date: eventDate,
+        category: "birthday",
         guests: friends,
-        category: 'birthday',
     }
     console.log(event)
+    axios.post('http://localhost:5000/events/add', event)
+        .then((res) => { 
+          console.log('Woohoo event added!')
+          navigate('/profile')
+        })
+        .catch((err) => console.log(err.response));
     // connect to backend, send 4 variables in useState
   };
   const handleSelectWishlist = (selectedOption) => {
@@ -94,54 +103,60 @@ function BirthdayEventCreationPage(props) {
  
   console.log(userLists);
 
-  return (
-    <div className="birthday-event-creation-container">
-      <div className="field-row">
-        <div className="field-block">
-          <div className="field-label">Date and Time</div>
-          <DatePicker
-            selected={eventDate}
-            onChange={(date) => setEventDate(date)}
-            showTimeSelect
-            dateFormat="Pp"
-          />
+    return (
+        <div className="birthday-event-creation-container">
+            <div className="field-row">
+                <div className="field-block">
+                    <div className="field-label">Name</div>
+                    <input
+                        className="input"
+                        type="text"
+                        name="name"
+                        placeholder="Event Name"
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className="field-block">
+                    <div className="field-label">Date and Time</div>
+                    <DatePicker 
+                        selected={eventDate} 
+                        onChange={(date) => setEventDate(date)} 
+                        showTimeSelect 
+                        dateFormat="Pp"
+                    />
+                </div>
+            </div>
+            <div className="field-row">
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <div className="field-block">
+                        <div className="field-label">Venue</div>
+                        <input
+                            className="input"
+                            type="text"
+                            name="venue"
+                            placeholder="Venue"
+                            onChange={(e) => setVenue(e.target.value)}
+                        />
+                    </div>
+                    <div className="big-field-block">
+                        <div className="field-label">
+                            Wishlist
+                        </div>
+                        <Select options={userWishlists} 
+                                onChange={handleSelectWishlist}/>
+                    </div>
+                </div>
+                <div className="big-field-block">
+                    <div className="field-label">
+                        Friends
+                        <span><FontAwesomeIcon className="add-icon" icon={faPlus} color="#F3F6ED" onClick={handleFriendList}/></span>
+                    </div>
+                    <div className="big-input" id="friend-input-block"></div>
+                    <FriendList/>
+                </div>
+            </div> 
+            <div className="add-event-button" onClick={onAddEvent}>Add Event</div> 
         </div>
-        <div className="field-block">
-          <div className="field-label">Venue</div>
-          <input
-            className="input"
-            type="text"
-            name="venue"
-            placeholder="Venue"
-            onChange={(e) => setVenue(e.target.value)}
-          />
-        </div>
-      </div>
-      <div className="field-row">
-        <div className="big-field-block">
-          <div className="field-label">Wishlist</div>
-          <Select options={userWishlists} onChange={handleSelectWishlist} />
-        </div>
-        <div className="big-field-block">
-          <div className="field-label">
-            Friends
-            <span>
-              <FontAwesomeIcon
-                className="add-icon"
-                icon={faPlus}
-                color="#F3F6ED"
-                onClick={handleFriendList}
-              />
-            </span>
-          </div>
-          <div className="big-input" id="friend-input-block"></div>
-          <FriendList />
-        </div>
-      </div>
-      <div className="add-event-button" onClick={onAddEvent}>
-        Add Event
-      </div>
-    </div>
   );
 }
 

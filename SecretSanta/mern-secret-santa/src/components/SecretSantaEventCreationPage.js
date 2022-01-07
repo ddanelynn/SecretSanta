@@ -13,8 +13,8 @@ function SecretSantaEventCreationPage(props) {
     const { _id } = userData
     const [eventDate, setEventDate] = useState(new Date());
     const [venue, setVenue] = useState("");
-    const [wishlist, setWishlist] = useState([]);
     const [friends, setFriends] = useState([]);
+    const [name, setName] = useState("");
 
     const navigate = useNavigate();
     const onAddEvent = () => {
@@ -85,6 +85,16 @@ function SecretSantaEventCreationPage(props) {
         <div className="birthday-event-creation-container">
             <div className="field-row">
                 <div className="field-block">
+                    <div className="field-label">Name</div>
+                    <input
+                        className="input"
+                        type="text"
+                        name="name"
+                        placeholder="Event Name"
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className="field-block">
                     <div className="field-label">Date and Time</div>
                     <DatePicker 
                         selected={eventDate} 
@@ -93,6 +103,8 @@ function SecretSantaEventCreationPage(props) {
                         dateFormat="Pp"
                     />
                 </div>
+            </div>
+            <div className="field-row">
                 <div className="field-block">
                     <div className="field-label">Venue</div>
                     <input
@@ -103,8 +115,6 @@ function SecretSantaEventCreationPage(props) {
                         onChange={(e) => setVenue(e.target.value)}
                     />
                 </div>
-            </div>
-            <div className="field-row fixed-row-width">
                 <div className="big-field-block">
                     <div className="field-label">
                         Participants

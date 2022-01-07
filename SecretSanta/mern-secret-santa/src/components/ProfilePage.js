@@ -10,14 +10,16 @@ import { ListItem } from "./ListItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "./Navbar";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import WishlistsActions from "../reducers/WishlistsReducer"
+import WishlistsActions from "../reducers/WishlistsReducer";
+import EventsActions from "../reducers/EventsReducer";
 import { COLORS } from "../constants/Colors";
 
 //TODO: Make title editable and add save list button
 function ProfilePage(props) {
-  const { userData, wishlistsRequest, userLists } = props;
+  const { userData, wishlistsRequest, userLists, eventsRequest, userEvents } =
+    props;
   const { username, _id } = userData || {};
   const [showModal, setShowModal] = useState(false);
   const [showInput, setShowInput] = useState(false);
@@ -28,15 +30,26 @@ function ProfilePage(props) {
   // const events = [{ name: "My 21st Birthday!!", date: }]
 
   useEffect(() => {
-    axios.get('http://localhost:5000/wishlists')
-    .then((res) => { 
-      const userLists = res.data.filter((list) => list.owner === _id)
-      wishlistsRequest(userLists)
-      // console.log(userLists)
-    })
-    .catch((err) => console.log(err));
-  }, [userLists])
+    axios
+      .get("http://localhost:5000/wishlists")
+      .then((res) => {
+        const userLists = res.data.filter((list) => list.owner === _id);
+        wishlistsRequest(userLists);
+        // console.log(userLists)
+      })
+      .catch((err) => console.log(err));
+  }, [userLists]);
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/events")
+      .then((res) => {
+        const userEvents = res.data.filter((list) => list.owner === _id);
+        eventsRequest(userEvents);
+        // console.log(userLists)
+      })
+      .catch((err) => console.log(err));
+  }, [userEvents]);
 
   const addList = () => {
     setShowModal(true);
@@ -103,145 +116,216 @@ function ProfilePage(props) {
   };
 
   const goToList = (item) => {
-    navigate("/wishlist", { state: { list_id: item._id }})
-  }
+    navigate("/wishlist", { state: { list_id: item._id } });
+  };
 
   const deleteWishList = (listId) => {
     axios
-    .delete(`http://localhost:5000/wishlists/${listId}`)
-    .then((res) => {
-      console.log("yay wihslist deleted!");
-    })
-    .catch((err) => console.log(err));
-  }
+      .delete(`http://localhost:5000/wishlists/${listId}`)
+      .then((res) => {
+        console.log("yay wihslist deleted!");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  console.log(userEvents);
 
   return (
     <div className="page-container">
-      <Navbar/>
-    <div className="profile-page">
-      <div className="top-section">
-        <Modal
-          isOpen={showModal}
-          style={{
-            content: {
-              position: "absolute",
-              top: "80px",
-              left: "200px",
-              right: "200px",
-              bottom: "80px",
-              border: "0px",
-              background: "#F3F6ED",
-              overflow: "auto",
-              WebkitOverflowScrolling: "touch",
-              borderRadius: "4px",
-              padding: "50px",
-            },
-          }}
-          onRequestClose={closeModal}
-        >
-          <Editable
-            style={{ marginBottom: 50 }}
-            text={title}
-            placeholder="Title of Wishlist"
-            defaultEditable
-            size="large"
+      <Navbar />
+      <div className="profile-page">
+        <div className="top-section">
+          <Modal
+            isOpen={showModal}
+            style={{
+              content: {
+                position: "absolute",
+                top: "80px",
+                left: "200px",
+                right: "200px",
+                bottom: "80px",
+                border: "0px",
+                background: "#F3F6ED",
+                overflow: "auto",
+                WebkitOverflowScrolling: "touch",
+                borderRadius: "4px",
+                padding: "50px",
+              },
+            }}
+            onRequestClose={closeModal}
           >
-            <input
-              className="wishlist-input"
-              type="text"
-              name="title"
+            <Editable
+              style={{ marginBottom: 50 }}
+              text={title}
               placeholder="Title of Wishlist"
-              onKeyDown={(e) => handleKeyDown(e)}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Editable>
-          <ul style={{ padding: 0 }}>
-            {items.map((item, index) => (
-              <div key={index}>
-                <ListItem
-                  itemName={item}
-                  indx={index}
-                  editItem={editItem}
-                  deleteItem={() => deleteItem(index)}
-                />
-              </div>
-            ))}
-          </ul>
-          {showInput && (
-            <div>
+              defaultEditable
+              size="large"
+            >
               <input
-                style={{ marginTop: 40, marginBottom: 15 }}
                 className="wishlist-input"
                 type="text"
-                name="item"
-                placeholder="New item"
-                value={newItem}
-                onChange={(e) => setNewItem(e.target.value)}
-                onKeyDown={(e) => handleNewItem(e)}
+                name="title"
+                placeholder="Title of Wishlist"
+                onKeyDown={(e) => handleKeyDown(e)}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
-              <div>
-                <button className="add-btn" onClick={addItemToList}>
-                  Add
-                </button>
-              </div>
-            </div>
-          )}
-          <div className="btn-container">
-            <button
-              className="save-btn"
-              style={{ marginRight: 25 }}
-              onClick={() => cancelInput()}
-            >
-              Cancel
-            </button>
-            <button className="save-btn" onClick={() => onSaveWishList()}>
-              Save Wishlist!
-            </button>
-          </div>
-        </Modal>
-        <div>
-          <div className="header-text">Hi, {username}!</div>
-          <div className="wishlists-container">
-            <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between', marginBottom: 40  }}>
-              <div>My Wishlists</div>
-              <button className="add-wishlist-btn" onClick={addList}>
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
-            </div>
+            </Editable>
             <ul style={{ padding: 0 }}>
-            { userLists && userLists.map((item, index) => (
-              <div key={index} className="wishlist-item-element">
-                <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between'}}>
-                <button className="wishlist-item-btn" onClick={() => goToList(item)}>
-                <FontAwesomeIcon icon={faCircle} color={COLORS[index]} style={{ marginRight: 20 }}/>
+              {items.map((item, index) => (
+                <div key={index}>
+                  <ListItem
+                    itemName={item}
+                    indx={index}
+                    editItem={editItem}
+                    deleteItem={() => deleteItem(index)}
+                  />
+                </div>
+              ))}
+            </ul>
+            {showInput && (
+              <div>
+                <input
+                  style={{ marginTop: 40, marginBottom: 15 }}
+                  className="wishlist-input"
+                  type="text"
+                  name="item"
+                  placeholder="New item"
+                  value={newItem}
+                  onChange={(e) => setNewItem(e.target.value)}
+                  onKeyDown={(e) => handleNewItem(e)}
+                />
                 <div>
-                {item.title}
+                  <button className="add-btn" onClick={addItemToList}>
+                    Add
+                  </button>
                 </div>
-                </button>
-                <button className="wishlist-delete-btn" onClick={() => deleteWishList(item._id)}>
-                <FontAwesomeIcon icon={faTrash}/>
-                </button>
-                </div>
-                <hr />
               </div>
-            ))}
-          </ul>
-          </div>
-          <div className="wishlists-container">
-            <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between' }}>
-              <div>My Upcoming Events</div>
-              <button className="add-wishlist-btn" onClick={() => navigate("/events")}>
-                <FontAwesomeIcon icon={faPlus} />
+            )}
+            <div className="btn-container">
+              <button
+                className="save-btn"
+                style={{ marginRight: 25 }}
+                onClick={() => cancelInput()}
+              >
+                Cancel
+              </button>
+              <button className="save-btn" onClick={() => onSaveWishList()}>
+                Save Wishlist!
               </button>
             </div>
+          </Modal>
+          <div>
+            <div className="header-text">Hi, {username}!</div>
+            <div className="wishlists-container">
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: 40,
+                }}
+              >
+                <div>My Wishlists</div>
+                <button className="add-wishlist-btn" onClick={addList}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
+              </div>
+              <ul style={{ padding: 0 }}>
+                {userLists &&
+                  userLists.map((item, index) => (
+                    <div key={index} className="wishlist-item-element">
+                      <div
+                        style={{
+                          flexDirection: "row",
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <button
+                          className="wishlist-item-btn"
+                          onClick={() => goToList(item)}
+                        >
+                          <FontAwesomeIcon
+                            icon={faCircle}
+                            color={COLORS[index]}
+                            style={{ marginRight: 20 }}
+                          />
+                          <div>{item.title}</div>
+                        </button>
+                        <button
+                          className="wishlist-delete-btn"
+                          onClick={() => deleteWishList(item._id)}
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </div>
+                      <hr />
+                    </div>
+                  ))}
+              </ul>
+            </div>
+            <div className="wishlists-container">
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  marginBottom: 40,
+                }}
+              >
+                <div>My Upcoming Events</div>
+                <button
+                  className="add-wishlist-btn"
+                  onClick={() => navigate("/events")}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </button>
+              </div>
+              <ul style={{ padding: 0 }}>
+                {userEvents &&
+                  userEvents.map((item, index) => (
+                    <div key={index} className="wishlist-item-element">
+                      <div
+                        style={{
+                          flexDirection: "row",
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <button
+                          className="wishlist-item-btn"
+                          onClick={() => goToList(item)}
+                        >
+                          <div>{item.name}</div>
+                        </button>
+                        <div style={{ flexDirection: "row", display: "flex" }}>
+                          <div style={{ marginRight: 20 }}>
+                            {new Intl.DateTimeFormat("en-US", {
+                              year: "numeric",
+                              month: "long",
+                              day: "2-digit",
+                            }).format(new Date(item.date))}
+                          </div>
+                          <button
+                            className="wishlist-delete-btn"
+                            onClick={() => deleteWishList(item._id)}
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                  ))}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="calendar">
-          <Calendar />
+          <div className="calendar">
+            <Calendar />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }
@@ -249,9 +333,16 @@ function ProfilePage(props) {
 const mapStateToProps = (state) => ({
   userData: state.user.payload,
   userLists: state.wishlists.payload,
+  userEvents: state.events.payload,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(Object.assign(WishlistsActions), dispatch);
+  bindActionCreators(
+    Object.assign(
+      Object.assign(WishlistsActions),
+      Object.assign(EventsActions)
+    ),
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
