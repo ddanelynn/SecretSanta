@@ -7,7 +7,7 @@ import Editable from "./Editable";
 export const ListItem = (props) => {
   const { itemName, editItem, indx, deleteItem } = props;
   const [itemEdit, setItemEdit] = useState(itemName);
-  console.log(indx)
+
 
   return (
     <div>

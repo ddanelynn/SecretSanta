@@ -15,7 +15,7 @@
     color: white;
     font-size: x-large;
   }
-  .wishlists-container {
+  .wishlist-container {
     background-color: #f3f6ed;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -59,10 +59,13 @@
   margin-right: 15px;
   font-weight: bold;
 }
-
 .wishlist-input-edit {
   background-color: white;
   padding: 10px;
   width: 300px;
   display: list-item;
+}
+.saved-indicator {
+  color:#dc594f;
+  margin-right: 15px;
 }

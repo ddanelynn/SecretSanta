@@ -160,3 +160,13 @@
   font-size: x-large;
   margin-top: 50px;
 }
+.wishlist-delete-btn {
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 15px;
+  border: none;
+  background-color: #f3f6ed;
+  cursor: pointer;
+  font-size: medium;
+  color: #4a4a4a;
+}
