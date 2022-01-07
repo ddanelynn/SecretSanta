@@ -5,33 +5,24 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Select from 'react-select';
 
 export const BirthdayEventCreationPage = () => {
 
     const [eventDate, setEventDate] = useState(new Date());
     const [venue, setVenue] = useState("");
-    const [wishlist, setWishlist] = useState([]);
+    const [wishlist, setWishlist] = useState();
     const [friends, setFriends] = useState([]);
+    const [name, setName] = useState("");
 
     const navigate = useNavigate();
     const onAddEvent = () => {
         // connect to backend, send 4 variables in useState
-        const items = document.querySelectorAll('wishlist-item');
-        const wishlistArr = [];
-        items.forEach((item) => {
-            wishlistArr.push(item.id);
-        });
-        setWishlist(wishlistArr);
+        navigate('/home');
+    
     }
-    const addWishlist = () => {
-        const wishlistBlock = document.getElementById('wishlist-input-block');
-        const newItem = document.createElement('input');
-        newItem.setAttribute('placeholder', "Key in your item")
-        newItem.setAttribute('class', 'wishlist-item');
-        newItem.addEventListener('input', (e) => {
-            e.target.id = e.target.value
-        });
-        wishlistBlock.appendChild(newItem);
+    const handleSelectWishlist = (selectedOption) => {
+        setWishlist(selectedOption.value);
     }
     const handleFriendList = () => {
         const friendList = document.querySelector('.friends-list');
@@ -80,10 +71,27 @@ export const BirthdayEventCreationPage = () => {
             )
         }
     }
+    // get wishlist from backend
+    const myWishlists = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ];
+    
 
     return (
         <div className="birthday-event-creation-container">
             <div className="field-row">
+                <div className="field-block">
+                    <div className="field-label">Name</div>
+                    <input
+                        className="input"
+                        type="text"
+                        name="name"
+                        placeholder="Event Name"
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
                 <div className="field-block">
                     <div className="field-label">Date and Time</div>
                     <DatePicker 
@@ -93,24 +101,26 @@ export const BirthdayEventCreationPage = () => {
                         dateFormat="Pp"
                     />
                 </div>
-                <div className="field-block">
-                    <div className="field-label">Venue</div>
-                    <input
-                        className="input"
-                        type="text"
-                        name="venue"
-                        placeholder="Venue"
-                        onChange={(e) => setVenue(e.target.value)}
-                    />
-                </div>
             </div>
             <div className="field-row">
-                <div className="big-field-block">
-                    <div className="field-label">
-                        Wishlist
-                        <span><FontAwesomeIcon className="add-icon" icon={faPlus} color="#F3F6ED" onClick={addWishlist}/></span>
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <div className="field-block">
+                        <div className="field-label">Venue</div>
+                        <input
+                            className="input"
+                            type="text"
+                            name="venue"
+                            placeholder="Venue"
+                            onChange={(e) => setVenue(e.target.value)}
+                        />
                     </div>
-                    <div className="big-input" id="wishlist-input-block"></div>
+                    <div className="big-field-block">
+                        <div className="field-label">
+                            Wishlist
+                        </div>
+                        <Select options={myWishlists} 
+                                onChange={handleSelectWishlist}/>
+                    </div>
                 </div>
                 <div className="big-field-block">
                     <div className="field-label">

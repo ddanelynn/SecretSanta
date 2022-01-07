@@ -22,6 +22,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-select": "^5.2.1",
     "react-spinners": "^0.11.0",
     "reduxsauce": "^1.2.1",
     "seamless-immutable": "^7.1.4",

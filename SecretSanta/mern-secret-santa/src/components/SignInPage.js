@@ -23,16 +23,14 @@ export const SignInPage = (props) => {
         password: password,
       }
   
-      // axios.post('http://localhost:5000/users/authenticate', user)
-      //   .then((res) => { 
-      //     console.log(res.data)
-      //     localStorage.setItem('login', true)
-      //     navigate('/profile')
-      //     userRequest(res.data)
-      //   })
-      //   .catch((err) => setAuthFail(true));
-      localStorage.setItem('login', true)
-      navigate('/profile')
+      axios.post('http://localhost:5000/users/authenticate', user)
+        .then((res) => { 
+          console.log(res.data)
+          localStorage.setItem('login', true)
+          navigate('/profile')
+          userRequest(res.data)
+        })
+        .catch((err) => setAuthFail(true));
     }
 
     const inputUsername = (username) => {

@@ -73,13 +73,12 @@ function ProfilePage(props) {
   };
 
   const deleteItem = (indx) => {
-    console.log(items.filter((_, i) => i !== indx));
     setItems((items) => items.filter((_, i) => i !== indx));
   };
 
   const addItemToList = () => {
     let temp = items;
-    temp = [...items, newItem.toString()];
+    temp = [...items, newItem];
     setItems(temp);
     setNewItem("");
   };
@@ -90,7 +89,7 @@ function ProfilePage(props) {
       items: items,
       owner: _id,
     };
-    
+
     axios
       .post("http://localhost:5000/wishlists/add", wishlist)
       .then((res) => {
@@ -104,11 +103,17 @@ function ProfilePage(props) {
   };
 
   const goToList = (item) => {
-    console.log(item._id)
     navigate("/wishlist", { state: { list_id: item._id }})
   }
 
-  console.log(userLists)
+  const deleteWishList = (listId) => {
+    axios
+    .delete(`http://localhost:5000/wishlists/${listId}`)
+    .then((res) => {
+      console.log("yay wihslist deleted!");
+    })
+    .catch((err) => console.log(err));
+  }
 
   return (
     <div className="page-container">
@@ -138,7 +143,6 @@ function ProfilePage(props) {
             style={{ marginBottom: 50 }}
             text={title}
             placeholder="Title of Wishlist"
-            type="input"
             defaultEditable
             size="large"
           >
@@ -167,7 +171,7 @@ function ProfilePage(props) {
           {showInput && (
             <div>
               <input
-                style={{ marginTop: 40 }}
+                style={{ marginTop: 40, marginBottom: 15 }}
                 className="wishlist-input"
                 type="text"
                 name="item"
@@ -208,12 +212,17 @@ function ProfilePage(props) {
             <ul style={{ padding: 0 }}>
             { userLists && userLists.map((item, index) => (
               <div key={index} className="wishlist-item-element">
+                <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between'}}>
                 <button className="wishlist-item-btn" onClick={() => goToList(item)}>
                 <FontAwesomeIcon icon={faCircle} color={COLORS[index]} style={{ marginRight: 20 }}/>
                 <div>
                 {item.title}
                 </div>
                 </button>
+                <button className="wishlist-delete-btn" onClick={() => deleteWishList(item._id)}>
+                <FontAwesomeIcon icon={faTrash}/>
+                </button>
+                </div>
                 <hr />
               </div>
             ))}

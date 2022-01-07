@@ -1,0 +1,136 @@
+/* event card */
+
+.event-card-container {
+    width: 500px;
+    height: 220px;
+    background-color: #F3F6ED;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    width: 55%;
+}
+
+.event-card-name {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.event-card-line {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    margin: 5px 0px;
+}
+
+.event-card-creator {
+    font-size: 24px;
+}
+
+.event-card-participants-container {
+    margin: 15px 0px;
+    display: flex;
+}
+
+.event-card-participant {
+    width: fit-content;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #9EB98E;
+    padding: 10px 15px;
+    margin-right: 8px;
+}
+.event-joined {
+    width: 90%;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    border: solid 5px #FFCA64;
+    text-align: center;
+    border-radius: 10px;
+    color: #FFCA64;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.event-card-join-button {
+    width: 90%;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #FFCA64;
+    border: solid 5px #FFCA64;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.event-card-date {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    width: 45%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.event-card-date-number {
+    font-size: 140px;
+    font-weight: bold;
+    text-align: center;
+    color: #A02B31;
+}
+
+.event-card-date-month {
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+/* home page */
+
+.feed-page-container {
+    background-color: #F1B7B5;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.feed-page-content {
+    display: flex;
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.event-card-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-event-button {
+    left: 900px;
+    bottom: 20px;
+    position: fixed;
+    width: 400px;
+    height: 60px;
+    background-color: #A02B31;
+    border-radius: 10px;
+    color: #F1B7B5;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
