@@ -6,8 +6,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { SignUpPage } from "./components/SignUpPage";
 import { HomePage } from "./components/HomePage";
 import { EventCreationPage } from "./components/EventCreationPage";
+import { BirthdayEventCreationPage } from "./components/BirthdayEventCreationPage";
 import ProfilePage from "./components/ProfilePage";
 import reducers from "./constants/Reducers";
+//import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const store = createStore(reducers);
@@ -17,7 +19,8 @@ function App() {
       <Router>
           {/* <Navbar /> */}
           <Routes>
-          <Route path="/" exact element={<SignInPage/>} />
+          <Route path="/" exact element={<BirthdayEventCreationPage/>} />
+          {/* <Route path="/" exact element={<SignInPage/>} /> */}
           <Route path="/events" exact element={<EventCreationPage/>} />
           <Route path="/sign-up" exact element={<SignUpPage/>} />
           <Route path="/home" exact element={<HomePage/>} />
