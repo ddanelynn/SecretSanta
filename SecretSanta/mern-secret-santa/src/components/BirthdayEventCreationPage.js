@@ -18,7 +18,7 @@ export const BirthdayEventCreationPage = () => {
 
     const navigate = useNavigate();
     const onAddEvent = () => {
-        // todo
+        // connect to backend, send 4 variables in useState
         const items = document.querySelectorAll('wishlist-item');
         const wishlistArr = [];
         items.forEach((item) => {
@@ -27,7 +27,6 @@ export const BirthdayEventCreationPage = () => {
         setWishlist(wishlistArr);
     }
     const addWishlist = () => {
-        // todo
         const wishlistBlock = document.getElementById('wishlist-input-block');
         const newItem = document.createElement('input');
         newItem.setAttribute('placeholder',)
@@ -38,7 +37,6 @@ export const BirthdayEventCreationPage = () => {
         wishlistBlock.appendChild(newItem);
     }
     const handleFriendList = () => {
-        // todo
         const friendList = document.querySelector('.friends-list');
         if (friendList.style.display === 'flex') {
             friendList.style.display = 'none';
@@ -47,14 +45,15 @@ export const BirthdayEventCreationPage = () => {
         }
     }
 
-    const addFriend = () => {
+    const addFriend = (friendName) => {
         const friendList = document.querySelector('.friends-list');
         friendList.style.display = "none";
         const friendListBlock = document.getElementById('friend-input-block');
         const newFriend = document.createElement('div');
         newFriend.setAttribute('class', 'indiv-friend');
-        newFriend.textContent = "hi";
+        newFriend.textContent = friendName;
         friendListBlock.appendChild(newFriend);
+        setFriends([...friends, friendName]);
     }
 
     const FriendList = () => {
@@ -65,7 +64,7 @@ export const BirthdayEventCreationPage = () => {
             friendsBlock.push(
                 <div className="friend">
                     <div className="friend-name">{value}</div>
-                    <div className="friend-list-button" onClick={addFriend}>Add</div>
+                    <div className="friend-list-button" onClick={() => addFriend(value)}>Add</div>
                 </div>
             )
         }
