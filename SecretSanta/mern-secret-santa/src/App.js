@@ -13,6 +13,7 @@ import reducers from "./constants/Reducers";
 import WishlistPage from "./components/WishlistPage";
 import PrivateRoute from "./components/PrivateRoute";
 import LogoutComponent from "./components/LogoutComponent";
+import FriendsPage from "./components/FriendsPage"
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route path="/create/birthday" exact element={<PrivateRoute/>}>
             <Route path="/create/birthday" exact element={<BirthdayEventCreationPage/>} />
+          </Route>
+          <Route path="/friends" exact element={<PrivateRoute/>}>
+            <Route path="/friends" exact element={<FriendsPage/>} />
           </Route>
           </Routes>
       </Router>
