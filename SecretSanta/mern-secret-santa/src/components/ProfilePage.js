@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import "./Profile.css";
 import { connect } from "react-redux";
 import Calendar from "react-calendar";
@@ -43,10 +43,10 @@ function ProfilePage(props) {
   };
 
   const editItem = (item, indx) => {
-      const temp = items;
-      items[indx] = item;
-      setItems(temp);
-  }
+    const temp = items;
+    items[indx] = item;
+    setItems(temp);
+  };
 
   const addItemToList = () => {
     let temp = items;
@@ -56,21 +56,21 @@ function ProfilePage(props) {
   };
 
   const onSaveWishList = () => {
-      console.log(items)
-      console.log(_id)
-      const wishlist = {
-        title: title,
-        items: items,
-        owner: _id,
-      }
-  
-      axios.post('http://localhost:5000/wishlists/add', wishlist)
-        .then(res => { 
-          console.log('yay wihslist added!')
-          setShowModal(false)
-        });
-  
-  }
+    console.log(items);
+    console.log(_id);
+    const wishlist = {
+      title: title,
+      items: items,
+      owner: _id,
+    };
+
+    axios.post("http://localhost:5000/wishlists/add", wishlist).then((res) => {
+      console.log("yay wihslist added!");
+      setShowModal(false);
+    });
+  };
+
+  console.log(userData);
 
   return (
     <div className="profile-page">
@@ -99,7 +99,14 @@ function ProfilePage(props) {
           // style={customStyles}
           // contentLabel="Example Modal"
         >
-          <Editable style={{ marginBottom: 50 }} text={title} placeholder="Title of Wishlist" type="input" defaultEditable size="large">
+          <Editable
+            style={{ marginBottom: 50 }}
+            text={title}
+            placeholder="Title of Wishlist"
+            type="input"
+            defaultEditable
+            size="large"
+          >
             <input
               className="wishlist-input"
               type="text"
@@ -113,7 +120,7 @@ function ProfilePage(props) {
           <ul style={{ padding: 0 }}>
             {items.map((item, index) => (
               <div key={index}>
-                <ListItem itemName={item} indx={index} editItem={editItem}/>
+                <ListItem itemName={item} indx={index} editItem={editItem} />
               </div>
             ))}
           </ul>
@@ -141,13 +148,23 @@ function ProfilePage(props) {
               </div>
             </div>
           )}
-          <button className="save-btn" onClick={() => onSaveWishList()}>Save Wishlist!</button>
+          <button className="save-btn" onClick={() => onSaveWishList()}>
+            Save Wishlist!
+          </button>
         </Modal>
         <div>
           <div className="header-text">Hi, {username}!</div>
           <div className="wishlists-container">
             <div style={{ flexDirection: "row", display: "flex" }}>
               <div>My Wishlists</div>
+              <button className="add-wishlist-btn" onClick={addList}>
+                <div>+</div>
+              </button>
+            </div>
+          </div>
+          <div className="wishlists-container">
+            <div style={{ flexDirection: "row", display: "flex" }}>
+              <div>My Upcoming Events</div>
               <button className="add-wishlist-btn" onClick={addList}>
                 <div>+</div>
               </button>
