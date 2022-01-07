@@ -8,7 +8,7 @@ import Modal from "react-modal";
 import Editable from "./Editable";
 import { ListItem } from "./ListItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "./Navbar";
 import { useNavigate } from 'react-router-dom';
 import { bindActionCreators } from "redux";
@@ -90,8 +90,7 @@ function ProfilePage(props) {
       items: items,
       owner: _id,
     };
-
-    console.log(wishlist);
+    
     axios
       .post("http://localhost:5000/wishlists/add", wishlist)
       .then((res) => {
@@ -208,7 +207,7 @@ function ProfilePage(props) {
             </div>
             <ul style={{ padding: 0 }}>
             { userLists && userLists.map((item, index) => (
-              <div key={index} className="wishlist-item">
+              <div key={index} className="wishlist-item-element">
                 <button className="wishlist-item-btn" onClick={() => goToList(item)}>
                 <FontAwesomeIcon icon={faCircle} color={COLORS[index]} style={{ marginRight: 20 }}/>
                 <div>

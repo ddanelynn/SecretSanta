@@ -50,7 +50,7 @@ export const SignUpPage = () => {
         <form onSubmit={onSubmit}>
           <div className="form">
             <input
-              className="input"
+              className="first-input"
               type="text"
               name="username"
               placeholder="Username"
@@ -58,7 +58,7 @@ export const SignUpPage = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
             <input
-              className="input"
+              className="first-input"
               type="email"
               name="email"
               placeholder="Email"
@@ -66,7 +66,7 @@ export const SignUpPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <input
-              className="input"
+              className="first-input"
               type="password"
               name="password"
               placeholder="Password"
@@ -74,7 +74,7 @@ export const SignUpPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <input
-              className="input"
+              className="first-input"
               type="password"
               name="confirmPassword"
               placeholder="Confirm Password"

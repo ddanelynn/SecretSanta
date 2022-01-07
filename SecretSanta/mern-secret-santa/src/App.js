@@ -20,8 +20,8 @@ function App() {
       <Router>
           {/* <Navbar /> */}
           <Routes>
-          <Route path="/" exact element={<BirthdayEventCreationPage/>} />
-          {/* <Route path="/" exact element={<SignInPage/>} /> */}
+          {/* <Route path="/" exact element={<BirthdayEventCreationPage/>} /> */}
+          <Route path="/" exact element={<SignInPage/>} />
           <Route path="/events" exact element={<EventCreationPage/>} />
           <Route path="/sign-up" exact element={<SignUpPage/>} />
           <Route path="/home" exact element={<HomePage/>} />
