@@ -19,13 +19,13 @@ export const EventCreationPage = () => {
             <Navbar />
         <div className="event-creation-container">
             <div className="event-block">
-                <div className="event-bubble" onClick={goToBirthday}>
+                <div className="event-bubble" onClick={goToSecretSanta}>
                     <img className="event-image" src={christmasImage}/>
                 </div>
                 <div className="event-title">Secret Santa</div>
             </div>
             <div className="event-block">
-                <div className="event-bubble" onClick={goToSecretSanta}>
+                <div className="event-bubble" onClick={goToBirthday}>
                     <img className="event-image" src={birthdayImage}/>
                 </div>
                 <div className="event-title">Birthday</div>
