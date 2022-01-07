@@ -18,11 +18,11 @@ export const BirthdayEventCreationPage = () => {
     const navigate = useNavigate();
     const onAddEvent = () => {
         // connect to backend, send 4 variables in useState
+        navigate('/home');
     
     }
     const handleSelectWishlist = (selectedOption) => {
-        setWishlist(selectedOption.value)
-        console.log(wishlist)
+        setWishlist(selectedOption.value);
     }
     const handleFriendList = () => {
         const friendList = document.querySelector('.friends-list');

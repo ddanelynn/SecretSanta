@@ -10,19 +10,13 @@ export const SecretSantaEventCreationPage = () => {
 
     const [eventDate, setEventDate] = useState(new Date());
     const [venue, setVenue] = useState("");
-    const [wishlist, setWishlist] = useState([]);
     const [friends, setFriends] = useState([]);
     const [name, setName] = useState("");
 
     const navigate = useNavigate();
     const onAddEvent = () => {
         // connect to backend, send 4 variables in useState
-        const items = document.querySelectorAll('wishlist-item');
-        const wishlistArr = [];
-        items.forEach((item) => {
-            wishlistArr.push(item.id);
-        });
-        setWishlist(wishlistArr);
+        navigate('/home');
     }
 
     const handleFriendList = () => {
