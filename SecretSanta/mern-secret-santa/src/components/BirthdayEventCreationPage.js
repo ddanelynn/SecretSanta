@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import birthdayImage from '../assets/birthday.png'
-import christmasImage from '../assets/christmas.png'
 import "./BirthdayEventCreation.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
