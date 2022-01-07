@@ -8,10 +8,10 @@ import { Navbar } from "./Navbar";
 export const EventCreationPage = () => {
     const navigate = useNavigate();
     const goToSecretSanta = () => {
-        navigate('/home')
+        navigate('/create/secret-santa')
     }
     const goToBirthday = () => {
-        navigate('/sign-up')
+        navigate('/create/birthday')
     }
 
     return (

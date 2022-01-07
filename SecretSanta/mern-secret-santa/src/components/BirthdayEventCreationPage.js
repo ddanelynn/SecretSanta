@@ -82,7 +82,7 @@ export const BirthdayEventCreationPage = () => {
     }
 
     return (
-        <div className="event-creation-container">
+        <div className="birthday-event-creation-container">
             <div className="field-row">
                 <div className="field-block">
                     <div className="field-label">Date and Time</div>
