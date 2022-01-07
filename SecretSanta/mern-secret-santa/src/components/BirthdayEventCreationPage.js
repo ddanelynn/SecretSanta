@@ -26,7 +26,7 @@ export const BirthdayEventCreationPage = () => {
     const addWishlist = () => {
         const wishlistBlock = document.getElementById('wishlist-input-block');
         const newItem = document.createElement('input');
-        newItem.setAttribute('placeholder',)
+        newItem.setAttribute('placeholder', "Key in your item")
         newItem.setAttribute('class', 'wishlist-item');
         newItem.addEventListener('input', (e) => {
             e.target.id = e.target.value
