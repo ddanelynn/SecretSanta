@@ -48,6 +48,11 @@ export const HomePage = () => {
         )
     }
 
+    const navigate = useNavigate();
+    const gotoEventCreation = () => {
+        navigate('/events')
+    }
+
     return (
         <div className="feed-page-container">
             <Navbar />
@@ -55,7 +60,7 @@ export const HomePage = () => {
                 <div className="event-card-wrapper">
                     {eventCards}
                 </div>
-                <div className="create-event-button">Create an Event</div>
+                <div className="create-event-button" onClick={gotoEventCreation}>Create an Event</div>
             </div>
         </div>
     )

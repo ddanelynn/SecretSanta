@@ -16,7 +16,7 @@ export const Navbar = () => {
     }
 
     const goToFeed = () => {
-        navigate('/events')
+        navigate('/home')
     }
 
     return (
