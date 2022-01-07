@@ -20,12 +20,11 @@ function App() {
           {/* <Navbar /> */}
           <Routes>
           <Route path="/" exact element={<BirthdayEventCreationPage/>} />
+          {/* <Route path="/" exact element={<SignInPage/>} /> */}
+          <Route path="/events" exact element={<EventCreationPage/>} />
           <Route path="/sign-up" exact element={<SignUpPage/>} />
           <Route path="/home" exact element={<HomePage/>} />
           <Route path="/profile" exact element={<ProfilePage/>} />
-          {/* <Route path='/services' exact component={Services} />
-          <Route path='/sign-up' exact component={SignUp} />
-          <Route path='/products' exact component={Products} /> */}
           </Routes>
       </Router>
       </Provider>

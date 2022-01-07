@@ -9,13 +9,20 @@ export const SignUpPage = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault();
         setLoading(true)
-    
+
+        if (confirmPassword !== password) {
+          alert('Please ensure that the passwords entered are the same.')
+          setLoading(false)
+          return null
+        }
+
         const user = {
           username: username,
           email: email,
@@ -52,7 +59,7 @@ export const SignUpPage = () => {
             />
             <input
               className="input"
-              type="text"
+              type="email"
               name="email"
               placeholder="Email"
               required
@@ -60,16 +67,19 @@ export const SignUpPage = () => {
             />
             <input
               className="input"
-              type="text"
+              type="password"
               name="password"
               placeholder="Password"
+              required
               onChange={(e) => setPassword(e.target.value)}
             />
             <input
               className="input"
-              type="text"
+              type="password"
               name="confirmPassword"
               placeholder="Confirm Password"
+              required
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
           <input className="signup-button" type="submit" value={loading ? "Loading..." : "Sign Up"}  />

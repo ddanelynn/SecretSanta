@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import birthdayImage from '../assets/birthday.png'
 import christmasImage from '../assets/christmas.png'
 import "./EventCreation.css";
+import { Navbar } from "./Navbar";
 
 export const EventCreationPage = () => {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ export const EventCreationPage = () => {
     }
 
     return (
+        <div className="page-container">
+            <Navbar />
         <div className="event-creation-container">
             <div className="event-block">
                 <div className="event-bubble" onClick={goToBirthday}>
@@ -27,6 +30,7 @@ export const EventCreationPage = () => {
                 </div>
                 <div className="event-title">Birthday</div>
             </div>
+        </div>
         </div>
     )
 }

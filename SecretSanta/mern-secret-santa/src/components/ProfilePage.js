@@ -7,6 +7,9 @@ import "react-calendar/dist/Calendar.css";
 import Modal from "react-modal";
 import Editable from "./Editable";
 import { ListItem } from "./ListItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Navbar } from "./Navbar";
 
 //TODO: Make title editable and add save list button
 function ProfilePage(props) {
@@ -17,13 +20,17 @@ function ProfilePage(props) {
   const [title, setTitle] = useState("");
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
+  // const events = [{ name: "My 21st Birthday!!", date: }]
 
   const addList = () => {
     setShowModal(true);
   };
 
-  const addItem = () => {
-    setShowInput(!showInput);
+  const cancelInput = () => {
+    setShowModal(false);
+    setTitle("");
+    setItems([]);
+    setShowInput(false);
   };
 
   const closeModal = () => {
@@ -33,6 +40,7 @@ function ProfilePage(props) {
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       setTitle(event.target.value);
+      setShowInput(true);
     }
   };
 
@@ -48,31 +56,41 @@ function ProfilePage(props) {
     setItems(temp);
   };
 
+  const deleteItem = (indx) => {
+    console.log(items.filter((_, i) => i !== indx));
+    setItems((items) => items.filter((_, i) => i !== indx));
+  };
+
   const addItemToList = () => {
     let temp = items;
-    temp = [...items, newItem];
+    temp = [...items, newItem.toString()];
     setItems(temp);
     setNewItem("");
   };
 
   const onSaveWishList = () => {
-    console.log(items);
-    console.log(_id);
     const wishlist = {
       title: title,
       items: items,
       owner: _id,
     };
 
-    axios.post("http://localhost:5000/wishlists/add", wishlist).then((res) => {
-      console.log("yay wihslist added!");
-      setShowModal(false);
-    });
+    console.log(wishlist);
+    axios
+      .post("http://localhost:5000/wishlists/add", wishlist)
+      .then((res) => {
+        console.log("yay wihslist added!");
+        setShowModal(false);
+        setTitle("");
+        setItems([]);
+        setShowInput(false);
+      })
+      .catch((err) => console.log(err));
   };
 
-  console.log(userData);
-
   return (
+    <div className="page-container">
+      <Navbar/>
     <div className="profile-page">
       <div className="top-section">
         <Modal
@@ -81,8 +99,8 @@ function ProfilePage(props) {
             content: {
               position: "absolute",
               top: "80px",
-              left: "150px",
-              right: "150px",
+              left: "200px",
+              right: "200px",
               bottom: "80px",
               border: "0px",
               background: "#F3F6ED",
@@ -93,11 +111,7 @@ function ProfilePage(props) {
               padding: "50px",
             },
           }}
-          // className="add-wishlist-modal"
-          // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
-          // style={customStyles}
-          // contentLabel="Example Modal"
         >
           <Editable
             style={{ marginBottom: 50 }}
@@ -120,16 +134,19 @@ function ProfilePage(props) {
           <ul style={{ padding: 0 }}>
             {items.map((item, index) => (
               <div key={index}>
-                <ListItem itemName={item} indx={index} editItem={editItem} />
+                <ListItem
+                  itemName={item}
+                  indx={index}
+                  editItem={editItem}
+                  deleteItem={() => deleteItem(index)}
+                />
               </div>
             ))}
           </ul>
-          <button className="add-item-btn" onClick={addItem}>
-            <div>+ Add Item</div>
-          </button>
           {showInput && (
             <div>
               <input
+                style={{ marginTop: 40 }}
                 className="wishlist-input"
                 type="text"
                 name="item"
@@ -142,31 +159,37 @@ function ProfilePage(props) {
                 <button className="add-btn" onClick={addItemToList}>
                   Add
                 </button>
-                <button className="add-btn" onClick={() => setShowInput(false)}>
-                  Cancel
-                </button>
               </div>
             </div>
           )}
-          <button className="save-btn" onClick={() => onSaveWishList()}>
-            Save Wishlist!
-          </button>
+          <div className="btn-container">
+            <button
+              className="save-btn"
+              style={{ marginRight: 25 }}
+              onClick={() => cancelInput()}
+            >
+              Cancel
+            </button>
+            <button className="save-btn" onClick={() => onSaveWishList()}>
+              Save Wishlist!
+            </button>
+          </div>
         </Modal>
         <div>
           <div className="header-text">Hi, {username}!</div>
           <div className="wishlists-container">
-            <div style={{ flexDirection: "row", display: "flex" }}>
+            <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between'  }}>
               <div>My Wishlists</div>
               <button className="add-wishlist-btn" onClick={addList}>
-                <div>+</div>
+                <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
           </div>
           <div className="wishlists-container">
-            <div style={{ flexDirection: "row", display: "flex" }}>
+            <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between' }}>
               <div>My Upcoming Events</div>
               <button className="add-wishlist-btn" onClick={addList}>
-                <div>+</div>
+                <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
           </div>
@@ -175,6 +198,7 @@ function ProfilePage(props) {
           <Calendar />
         </div>
       </div>
+    </div>
     </div>
   );
 }
