@@ -32,6 +32,7 @@ export const SignUpPage = () => {
         axios.post('http://localhost:5000/users/add', user)
           .then(res => { 
             setSuccess(true)
+            localStorage.setItem('login', true)
           });
     
       }
