@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { connect } from "react-redux";
+import axios from 'axios';
 import "./BirthdayEventCreation.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-export const SecretSantaEventCreationPage = () => {
-
+function SecretSantaEventCreationPage(props) {
+    const { userData } = props
+    const { _id } = userData
     const [eventDate, setEventDate] = useState(new Date());
     const [venue, setVenue] = useState("");
     const [wishlist, setWishlist] = useState([]);
@@ -15,13 +18,19 @@ export const SecretSantaEventCreationPage = () => {
 
     const navigate = useNavigate();
     const onAddEvent = () => {
-        // connect to backend, send 4 variables in useState
-        const items = document.querySelectorAll('wishlist-item');
-        const wishlistArr = [];
-        items.forEach((item) => {
-            wishlistArr.push(item.id);
-        });
-        setWishlist(wishlistArr);
+        const event = {
+            owner: _id,
+            venue: venue,
+            date: eventDate,
+            guests: friends,
+            category: 'santa',
+        }
+        console.log(event)
+        axios.post('http://localhost:5000/events/add', event)
+        .then((res) => { 
+          console.log('Woohoo event added!')
+        })
+        .catch((err) => console.log(err));
     }
 
     const handleFriendList = () => {
@@ -110,3 +119,9 @@ export const SecretSantaEventCreationPage = () => {
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    userData: state.user.payload,
+  });
+
+export default connect(mapStateToProps)(SecretSantaEventCreationPage);
