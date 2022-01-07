@@ -24,7 +24,7 @@ router.route('/add').post((req, res) => {
 });
 
 router.route('/:id').get((req, res) => {
-  Event.findById(req.params.id)
+  Wishlist.findById(req.params.id)
     .then(wishlist => res.json(wishlist))
     .catch(err => res.status(400).json('Error: ' + err));
 });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
 import { connect } from "react-redux";
@@ -8,19 +8,35 @@ import Modal from "react-modal";
 import Editable from "./Editable";
 import { ListItem } from "./ListItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "./Navbar";
+import { useNavigate } from 'react-router-dom';
+import { bindActionCreators } from "redux";
+import WishlistsActions from "../reducers/WishlistsReducer"
+import { COLORS } from "../constants/Colors";
 
 //TODO: Make title editable and add save list button
 function ProfilePage(props) {
-  const { userData } = props;
+  const { userData, wishlistsRequest, userLists } = props;
   const { username, _id } = userData || {};
   const [showModal, setShowModal] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [title, setTitle] = useState("");
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
+  const navigate = useNavigate();
   // const events = [{ name: "My 21st Birthday!!", date: }]
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/wishlists')
+    .then((res) => { 
+      const userLists = res.data.filter((list) => list.owner === _id)
+      wishlistsRequest(userLists)
+      // console.log(userLists)
+    })
+    .catch((err) => console.log(err));
+  }, [userLists])
+
 
   const addList = () => {
     setShowModal(true);
@@ -88,6 +104,13 @@ function ProfilePage(props) {
       .catch((err) => console.log(err));
   };
 
+  const goToList = (item) => {
+    console.log(item._id)
+    navigate("/wishlist", { state: { list_id: item._id }})
+  }
+
+  console.log(userLists)
+
   return (
     <div className="page-container">
       <Navbar/>
@@ -107,7 +130,6 @@ function ProfilePage(props) {
               overflow: "auto",
               WebkitOverflowScrolling: "touch",
               borderRadius: "4px",
-              outline: "none",
               padding: "50px",
             },
           }}
@@ -178,17 +200,30 @@ function ProfilePage(props) {
         <div>
           <div className="header-text">Hi, {username}!</div>
           <div className="wishlists-container">
-            <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between'  }}>
+            <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between', marginBottom: 40  }}>
               <div>My Wishlists</div>
               <button className="add-wishlist-btn" onClick={addList}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
+            <ul style={{ padding: 0 }}>
+            { userLists && userLists.map((item, index) => (
+              <div key={index} className="wishlist-item">
+                <button className="wishlist-item-btn" onClick={() => goToList(item)}>
+                <FontAwesomeIcon icon={faCircle} color={COLORS[index]} style={{ marginRight: 20 }}/>
+                <div>
+                {item.title}
+                </div>
+                </button>
+                <hr />
+              </div>
+            ))}
+          </ul>
           </div>
           <div className="wishlists-container">
             <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between' }}>
               <div>My Upcoming Events</div>
-              <button className="add-wishlist-btn" onClick={addList}>
+              <button className="add-wishlist-btn" onClick={() => navigate("/events")}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
@@ -205,6 +240,10 @@ function ProfilePage(props) {
 
 const mapStateToProps = (state) => ({
   userData: state.user.payload,
+  userLists: state.wishlists.payload,
 });
 
-export default connect(mapStateToProps)(ProfilePage);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(Object.assign(WishlistsActions), dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
