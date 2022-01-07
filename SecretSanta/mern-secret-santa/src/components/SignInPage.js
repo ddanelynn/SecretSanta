@@ -52,14 +52,14 @@ export const SignInPage = (props) => {
         <form onSubmit={onSubmit}>
           <div className="form">
             <input
-              className="input"
+              className="first-input"
               type="text"
               name="username"
               placeholder="Username"
               onChange={(e) => inputUsername(e.target.value)}
             />
             <input
-              className="input"
+              className="first-input"
               type="text"
               name="password"
               placeholder="Password"

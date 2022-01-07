@@ -32,7 +32,7 @@
     overflow: scroll;
     scrollbar-width: none;
   }
-  .wishlist-item {
+  .wishlist-item-element {
     text-align: start;
     margin-bottom: 15px;
 }

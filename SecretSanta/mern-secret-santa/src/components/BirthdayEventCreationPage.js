@@ -117,9 +117,8 @@ export const BirthdayEventCreationPage = () => {
                         Friends
                         <span><FontAwesomeIcon className="add-icon" icon={faPlus} color="#F3F6ED" onClick={handleFriendList}/></span>
                     </div>
-                    <div className="big-input" id="friend-input-block">
-                        <FriendList/>
-                    </div>
+                    <div className="big-input" id="friend-input-block"></div>
+                    <FriendList/>
                 </div>
             </div> 
             <div className="add-event-button" onClick={onAddEvent}>Add Event</div> 

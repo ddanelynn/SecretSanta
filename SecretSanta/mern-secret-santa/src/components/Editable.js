@@ -8,6 +8,7 @@ const Editable = ({
   children,
   defaultEditable,
   size,
+  color,
   ...props
 }) => {
   const [isEditing, setEditing] = useState(defaultEditable);
@@ -37,7 +38,7 @@ const Editable = ({
         <div
           onClick={() => setEditing(true)}
         >
-          <span className={ size === "large" ? "wishlist-title" : "list-item"}>
+          <span className={ color === "white" ? "view-wishlist-title" : size === "large" ? "wishlist-title" : "list-item"}>
             {text || placeholder || ""}
           </span>
         </div>

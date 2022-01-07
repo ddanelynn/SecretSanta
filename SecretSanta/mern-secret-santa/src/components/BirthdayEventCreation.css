@@ -23,7 +23,7 @@
 
 .big-field-block {
     width: 300px;
-    height: fit-content;
+    height: 400px;
     margin: 20px;
 }
 
@@ -107,15 +107,16 @@ input:focus {
 }
 
 .friends-list {
+    position: relative;
+    top: -320px;
     width: 100%;
-    min-height: 100%;
-    background-color: #9EB98E;
+    height: 320px;
+    background-color: #c29673;
     border-radius: 5px;
     display: none;
     align-items: center;
     text-align: center;
     flex-direction: column;
-    margin-bottom: 10px;
 }
 
 .no-data {
@@ -150,7 +151,12 @@ input:focus {
     border-radius: 5px;
     width: 90%;
     height: 30px;
+    min-height: 30px;
     color: #F3F6ED;
     margin: 5px;
     padding: 10px;
+}
+
+.friend-name {
+    color: #F3F6ED;
 }

@@ -140,7 +140,7 @@
     border-bottom: 4px solid #fff;
 }
 
-.wishlist-item {
+.wishlist-item-element {
     text-align: start;
     margin-bottom: 15px;
 }
@@ -153,3 +153,8 @@
     cursor: pointer;
     font-size: medium;
 }
+.view-wishlist-title {
+    color: white;
+    font-size: x-large;
+    margin-top: 50px;
+  }
