@@ -12,11 +12,11 @@ export const Navbar = () => {
     }
 
     const goToEvents = () => {
-        navigate('/')
+        navigate('/events')
     }
 
     const goToFeed = () => {
-        navigate('/')
+        navigate('/events')
     }
 
     return (
