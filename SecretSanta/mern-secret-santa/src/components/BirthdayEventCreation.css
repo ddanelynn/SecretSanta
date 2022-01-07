@@ -1,0 +1,90 @@
+.event-creation-container {
+    width: 100%;
+    height: 100%;
+    background-color: #6A7A60; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.field-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.field-block {
+    width: 300px;
+    height: 120px;
+    margin: 0px 20px;
+}
+
+.big-field-block {
+    width: 300px;
+    height: fit-content;
+    margin: 20px;
+}
+
+.input {
+    width: fit-content;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.field-label {
+    font-size: 24px;
+    color: #F3F6ED;
+    margin: 15px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.react-datepicker__day--selected {
+    background-color: #6A7A60 !important;
+}
+
+.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {
+    background-color: #6A7A60 !important;
+}
+
+.react-datepicker__header {
+    background-color: #F3F6ED !important;
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F3F6ED;
+    color: #6A7A60;
+}
+
+input:focus {
+    outline: none;
+}
+
+.big-input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F3F6ED;
+    color: #6A7A60;
+    height: 300px;
+}
+
+.add-event-button {
+    width: 400px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F1B7B5;
+    font-weight: bold;
+    background-color: #A02B31;
+    border-radius: 10px;
+    margin-top: 40px;
+}
