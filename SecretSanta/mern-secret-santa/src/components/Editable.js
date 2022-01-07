@@ -13,16 +13,22 @@ const Editable = ({
   const [isEditing, setEditing] = useState(defaultEditable);
 
   const handleKeyDown = (event, type) => {
-    if (event.key === "Enter") {
+    if (event.key === "Enter" && text.length > 0) {
         setEditing(false);
       }
   };
+
+  const handlePress = () => {
+    if(text.length > 0) {
+      setEditing(false)
+    }
+  }
 
   return (
     <section {...props}>
       {isEditing ? (
         <div
-          onBlur={() => setEditing(false)}
+          onBlur={() => handlePress()}
           onKeyDown={e => handleKeyDown(e, type)}
         >
           {children}
@@ -32,7 +38,7 @@ const Editable = ({
           onClick={() => setEditing(true)}
         >
           <span className={ size === "large" ? "wishlist-title" : "list-item"}>
-            {text || placeholder || "Editable content"}
+            {text || placeholder || ""}
           </span>
         </div>
       )}

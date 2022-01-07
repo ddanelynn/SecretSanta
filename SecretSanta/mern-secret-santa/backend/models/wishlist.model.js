@@ -15,7 +15,7 @@ const wishlistSchema = new Schema({
   },
   items: [{
     type: String,
-    unique: true,
+    //unique: true,
   }],
 }, {
   timestamps: true,
