@@ -8,7 +8,7 @@ import Modal from "react-modal";
 import Editable from "./Editable";
 import { ListItem } from "./ListItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "./Navbar";
 import { useNavigate } from 'react-router-dom';
 import { bindActionCreators } from "redux";
@@ -79,7 +79,7 @@ function ProfilePage(props) {
 
   const addItemToList = () => {
     let temp = items;
-    temp = [...items, newItem.toString()];
+    temp = [...items, newItem];
     setItems(temp);
     setNewItem("");
   };
@@ -90,7 +90,7 @@ function ProfilePage(props) {
       items: items,
       owner: _id,
     };
-    
+
     axios
       .post("http://localhost:5000/wishlists/add", wishlist)
       .then((res) => {
@@ -138,7 +138,7 @@ function ProfilePage(props) {
             style={{ marginBottom: 50 }}
             text={title}
             placeholder="Title of Wishlist"
-            type="input"
+            //type="input"
             defaultEditable
             size="large"
           >
@@ -167,7 +167,7 @@ function ProfilePage(props) {
           {showInput && (
             <div>
               <input
-                style={{ marginTop: 40 }}
+                style={{ marginTop: 40, marginBottom: 15 }}
                 className="wishlist-input"
                 type="text"
                 name="item"

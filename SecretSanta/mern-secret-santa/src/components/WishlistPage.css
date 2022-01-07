@@ -11,10 +11,9 @@
     display: flex;
     height: 100%;
   }
-  .header-text {
+  .list-header-text {
     color: white;
     font-size: x-large;
-    margin-top: 50px;
   }
   .wishlists-container {
     background-color: #f3f6ed;
@@ -40,9 +39,30 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 760px;
+    margin-top: 50px;
 }
 .edit-btn {
     border: none;
     background-color: #f3f6ed;
     cursor: pointer;
+}
+.add-btn {
+  padding: 5px;
+  background-color: #dc594f;
+  color: white;
+  border-width: 0;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+.wishlist-input-edit {
+  background-color: white;
+  padding: 10px;
+  width: 300px;
+  display: list-item;
 }

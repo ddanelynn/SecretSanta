@@ -11,7 +11,7 @@ export const ListItem = (props) => {
 
   return (
     <div>
-      <div style={{ display:"flex", flexDirection: 'row', justifyContent: "space-between" }}>
+      <div style={{ display:"flex", flexDirection: 'row', justifyContent: "space-between", marginBottom: 15 }}>
       <Editable text={itemEdit} type="input" defaultEditable={false}>
         <input
           className="wishlist-input"
