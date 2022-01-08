@@ -231,9 +231,10 @@ function ProfilePage(props) {
                   <FontAwesomeIcon icon={faPlus} />
                 </button>
               </div>
-              <ul style={{ padding: 0 }}>
-                {userLists &&
-                  userLists.map((item, index) => (
+              {/* <ul style={{ padding: 0 }}> */}
+                {userLists && (userLists.length > 0 ?
+                  ( userLists.map((item, index) => (
+                    <ul style={{ padding: 0 }}>
                     <div key={index} className="wishlist-item-element">
                       <div
                         style={{
@@ -262,8 +263,14 @@ function ProfilePage(props) {
                       </div>
                       <hr />
                     </div>
-                  ))}
-              </ul>
+                    </ul>
+                  ))) : (
+                    <div>
+                      No wishlists created yet
+                      </div>
+                  )
+                  )}
+              {/* </ul> */}
             </div>
             <div className="wishlists-container">
               <div
@@ -283,8 +290,8 @@ function ProfilePage(props) {
                 </button>
               </div>
               <ul style={{ padding: 0 }}>
-                {userEvents &&
-                  userEvents.map((item, index) => (
+                {userEvents && userEvents.length > 0 ? 
+                ( userEvents.map((item, index) => (
                     <div key={index} className="wishlist-item-element">
                       <div
                         style={{
@@ -317,7 +324,12 @@ function ProfilePage(props) {
                       </div>
                       <hr />
                     </div>
-                  ))}
+                  ))
+                  ) : 
+                  ( <div>
+                    No events yet
+                    </div>
+                      )}
               </ul>
             </div>
           </div>
