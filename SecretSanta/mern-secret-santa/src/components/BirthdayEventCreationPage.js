@@ -79,7 +79,7 @@ function BirthdayEventCreationPage(props) {
 
   const FriendList = () => {
     const friendsCount = 3; //retrieve from backend
-    const friends = ["amy", "bob", "claire"]; //retrieve from backend
+    const friends = ["Ding Dong", "Danelynn", "Tasha"]; //retrieve from backend
     const friendsBlock = [];
     for (const [index, value] of friends.entries()) {
       friendsBlock.push(
