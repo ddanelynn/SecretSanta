@@ -27,13 +27,10 @@ export const SignInPage = (props) => {
         .then((res) => { 
           console.log(res.data)
           localStorage.setItem('login', true)
-          navigate('/profile')
+          navigate('/home')
           userRequest(res.data)
         })
         .catch((err) => setAuthFail(true));
-
-        localStorage.setItem('login', true)
-        navigate('/profile')
     }
 
     const inputUsername = (username) => {

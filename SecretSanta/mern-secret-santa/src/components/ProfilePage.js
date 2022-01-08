@@ -28,10 +28,10 @@ function ProfilePage(props) {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const mark = [
-    '2022-01-23T17:42:26.000+00:00',
+    "2022-01-30T17:42:26.000+00:00",
     // '20-01-2022',
     // '31-01-2022'
-]
+  ];
   // const events = [{ name: "My 21st Birthday!!", date: }]
 
   useEffect(() => {
@@ -241,44 +241,43 @@ function ProfilePage(props) {
                 </button>
               </div>
               {/* <ul style={{ padding: 0 }}> */}
-                {userLists && (userLists.length > 0 ?
-                  ( userLists.map((item, index) => (
+              {userLists &&
+                (userLists.length > 0 ? (
+                  userLists.map((item, index) => (
                     <ul style={{ padding: 0 }}>
-                    <div key={index} className="wishlist-item-element">
-                      <div
-                        style={{
-                          flexDirection: "row",
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <button
-                          className="wishlist-item-btn"
-                          onClick={() => goToList(item)}
+                      <div key={index} className="wishlist-item-element">
+                        <div
+                          style={{
+                            flexDirection: "row",
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
                         >
-                          <FontAwesomeIcon
-                            icon={faCircle}
-                            color={COLORS[index]}
-                            style={{ marginRight: 20 }}
-                          />
-                          <div>{item.title}</div>
-                        </button>
-                        <button
-                          className="wishlist-delete-btn"
-                          onClick={() => deleteWishList(item._id)}
-                        >
-                          <FontAwesomeIcon icon={faTrash} />
-                        </button>
+                          <button
+                            className="wishlist-item-btn"
+                            onClick={() => goToList(item)}
+                          >
+                            <FontAwesomeIcon
+                              icon={faCircle}
+                              color={COLORS[index]}
+                              style={{ marginRight: 20 }}
+                            />
+                            <div>{item.title}</div>
+                          </button>
+                          <button
+                            className="wishlist-delete-btn"
+                            onClick={() => deleteWishList(item._id)}
+                          >
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
+                        </div>
+                        <hr />
                       </div>
-                      <hr />
-                    </div>
                     </ul>
-                  ))) : (
-                    <div>
-                      No wishlists created yet
-                      </div>
-                  )
-                  )}
+                  ))
+                ) : (
+                  <div>No wishlists created yet</div>
+                ))}
               {/* </ul> */}
             </div>
             <div className="wishlists-container">
@@ -299,8 +298,8 @@ function ProfilePage(props) {
                 </button>
               </div>
               <ul style={{ padding: 0 }}>
-                {userEvents && userEvents.length > 0 ? 
-                ( userEvents.map((item, index) => (
+                {userEvents && userEvents.length > 0 ? (
+                  userEvents.map((item, index) => (
                     <div key={index} className="wishlist-item-element">
                       <div
                         style={{
@@ -334,21 +333,26 @@ function ProfilePage(props) {
                       <hr />
                     </div>
                   ))
-                  ) : 
-                  ( <div>
-                    No events yet
-                    </div>
-                      )}
+                ) : (
+                  <div>No events yet</div>
+                )}
               </ul>
             </div>
           </div>
           <div className="calendar">
-            <Calendar 
-            // tileClassName={({ date, view }) => {
-            //   if(mark.find(x=> x === date)){
-            //    return  'highlight'
-            //   }
-            // }}
+            <Calendar
+              tileClassName={({ activeStartDate, date, view }) => {
+                if (
+                  mark.find(
+                    (x) =>
+                      date.getDay() === new Date(x).getDay() &&
+                      date.getMonth() === new Date(x).getMonth() &&
+                      date.getDate() === new Date(x).getDate()
+                  )
+                ) {
+                  return "highlight";
+                }
+              }}
             />
           </div>
         </div>
