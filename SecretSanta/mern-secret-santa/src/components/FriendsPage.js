@@ -9,7 +9,6 @@ import { COLORS } from "../constants/Colors";
 import SearchBar from "./SearchBar";
 import { tr } from "date-fns/locale";
 
-//TODO: Make title editable and add save list button
 const FriendsPage = () => {
     // const { userData, wishlistsRequest, userLists } = props;
     // const { username, _id } = userData || {};
@@ -41,7 +40,7 @@ const FriendsPage = () => {
         {
             name: 'Ding Dong',
             birthday: '23/07/1999',
-            eventsCreated: [{ name: 'event1' }, { name: 'event2' }],
+            eventsCreated: [{ name: 'Christmas' }, { name: "Children's Day" }],
             userId: 0
         },
         {
