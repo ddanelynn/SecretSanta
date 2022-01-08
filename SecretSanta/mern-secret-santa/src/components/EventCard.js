@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./HomePage.css";
+import { connect } from "react-redux";
 
-export const EventCard = ({ event }) => {
+export const EventCard = ({ event, userData }) => {
 
     const { name, creator, participants, joinStatus, date, month } = event;
 
     const [joinState, setJoinState] = useState(joinStatus);
+
+    const { username } = userData || {}
 
     const isJoined = () => {
         if (joinState) {
@@ -17,12 +20,12 @@ export const EventCard = ({ event }) => {
 
     const handleClick = () => {
         if (joinState) {
-            const index = participants.indexOf(creator);
+            const index = participants.indexOf(username);
             participants.splice(index, 1);
             setJoinState(false);
             // update joinstatus in backend
         } else {
-            participants.push(creator);
+            participants.push(username);
             setJoinState(true);
             // update joinstatus in backend
         }
@@ -58,3 +61,9 @@ export const EventCard = ({ event }) => {
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    userData: state.user.payload,
+  });
+
+  export default connect(mapStateToProps)(EventCard);

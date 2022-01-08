@@ -27,6 +27,11 @@ function ProfilePage(props) {
   const [newItem, setNewItem] = useState("");
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
+  const mark = [
+    '2022-01-23T17:42:26.000+00:00',
+    // '20-01-2022',
+    // '31-01-2022'
+]
   // const events = [{ name: "My 21st Birthday!!", date: }]
 
   useEffect(() => {
@@ -338,7 +343,13 @@ function ProfilePage(props) {
             </div>
           </div>
           <div className="calendar">
-            <Calendar />
+            <Calendar 
+            // tileClassName={({ date, view }) => {
+            //   if(mark.find(x=> x === date)){
+            //    return  'highlight'
+            //   }
+            // }}
+            />
           </div>
         </div>
       </div>
