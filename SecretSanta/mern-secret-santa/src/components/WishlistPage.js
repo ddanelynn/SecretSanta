@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import backArrow from '../assets/back-arrow.png'
 
+
 function WishlistPage(props) {
   const { state } = useLocation();
   const { list_id } = state;

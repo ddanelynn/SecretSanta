@@ -11,6 +11,7 @@ const eventSchema = new Schema({
   // guests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   guests: [{ type: String }],
   name: { type: String, required: true },
+  wishlist: { type: Schema.Types.ObjectId, ref: 'Wishlist' }
 }, {
   timestamps: true,
 });

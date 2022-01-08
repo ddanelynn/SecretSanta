@@ -14,6 +14,7 @@ router.route('/add').post((req, res) => {
   const guests = req.body.guests;
   const category = req.body.category;
   const name = req.body.name;
+  const wishlist = req.body.wishlist;
 
   const newEvent = new Event({
     name,
@@ -22,6 +23,7 @@ router.route('/add').post((req, res) => {
     guests,
     date,
     category,
+    wishlist,
   });
 
   newEvent.save()

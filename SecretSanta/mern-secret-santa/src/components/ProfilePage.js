@@ -119,6 +119,10 @@ function ProfilePage(props) {
     navigate("/wishlist", { state: { list_id: item._id } });
   };
 
+  const goToEvent = (item) => {
+    navigate("/event", { state: { event_id: item._id } });
+  };
+
   const deleteWishList = (listId) => {
     axios
       .delete(`http://localhost:5000/wishlists/${listId}`)
@@ -302,7 +306,7 @@ function ProfilePage(props) {
                       >
                         <button
                           className="wishlist-item-btn"
-                          onClick={() => goToList(item)}
+                          onClick={() => goToEvent(item)}
                         >
                           <div>{item.name}</div>
                         </button>

@@ -18,7 +18,6 @@ function BirthdayEventCreationPage(props) {
   const [friends, setFriends] = useState([]);
   const [name, setName] = useState("");
   const [userWishlists, setUserWishlists] = useState([]);
-  const [createWishlist, setCreateWishlist] = useState([])
 
   const navigate = useNavigate();
 
@@ -39,6 +38,7 @@ function BirthdayEventCreationPage(props) {
       date: eventDate,
       category: "birthday",
       guests: friends,
+      wishlist: wishlist,
     };
     console.log(event);
     axios
@@ -51,7 +51,7 @@ function BirthdayEventCreationPage(props) {
   };
   const handleSelectWishlist = (selectedOption) => {
     setWishlist(selectedOption.value);
-    console.log(wishlist);
+    console.log(selectedOption.value);
   };
   const handleFriendList = () => {
     const friendList = document.querySelector(".friends-list");
@@ -107,7 +107,6 @@ function BirthdayEventCreationPage(props) {
     }
   };
 
-  console.log(createWishlist);
 
   return (
     <div className="birthday-event-creation-container">

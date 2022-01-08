@@ -14,6 +14,7 @@ import WishlistPage from "./components/WishlistPage";
 import PrivateRoute from "./components/PrivateRoute";
 import LogoutComponent from "./components/LogoutComponent";
 import FriendsPage from "./components/FriendsPage"
+import EventsPage from "./components/EventsPage";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/wishlist" exact element={<PrivateRoute/>}>
             <Route path="/wishlist" exact element={<WishlistPage/>} />
+          </Route>
+          <Route path="/event" exact element={<PrivateRoute/>}>
+            <Route path="/event" exact element={<EventsPage/>} />
           </Route>
           <Route path="/create/birthday" exact element={<PrivateRoute/>}>
             <Route path="/create/birthday" exact element={<BirthdayEventCreationPage/>} />
