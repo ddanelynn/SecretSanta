@@ -49,17 +49,13 @@
     min-width: 30%;
 }
 
-.wishlist-item-element {
-    margin-bottom: 15px;
-    background-color: white;
-}
-
 .friendNotSelectedContainer {
     text-align: center;
 }
 
 .friend-item-element {
     margin-bottom: 15px;
+    background-color: white;
 }
 
 .friend-item-btn {
