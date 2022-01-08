@@ -7,7 +7,7 @@ const SearchBar = ({keyword,setKeyword}) => {
      style={BarStyling}
      key="searchBar"
      value={keyword}
-     placeholder={"Search Friends"}
+     placeholder={"Search"}
      onChange={(e) => setKeyword(e.target.value)}
     />
   );

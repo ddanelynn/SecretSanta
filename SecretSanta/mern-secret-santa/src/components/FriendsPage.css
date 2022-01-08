@@ -49,6 +49,11 @@
     min-width: 30%;
 }
 
+.wishlist-item-element {
+    margin-bottom: 15px;
+    background-color: white;
+}
+
 .friendNotSelectedContainer {
     text-align: center;
 }
@@ -65,4 +70,10 @@
     cursor: pointer;
     font-size: medium;
     padding: 0;
+}
+
+.friendDetailsCardName {
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem 0rem;
 }

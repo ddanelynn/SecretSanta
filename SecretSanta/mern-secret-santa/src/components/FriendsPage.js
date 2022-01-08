@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./FriendsPage.css";
 import { ListItem } from "./ListItem";
@@ -7,39 +7,117 @@ import { faCircle, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Navbar } from "./Navbar";
 import { COLORS } from "../constants/Colors";
 import SearchBar from "./SearchBar";
+import { tr } from "date-fns/locale";
 
 //TODO: Make title editable and add save list button
 const FriendsPage = () => {
     // const { userData, wishlistsRequest, userLists } = props;
     // const { username, _id } = userData || {};
 
-    const [selectedFriendIndex, setSelectedFriendIndex] = useState(null)
+    const [selectedUserId, setSelectedUserId] = useState(null)
     const [searchWords, setSearchWords] = useState("")
-    const [listOfFriends, setListOfFriends] = useState([])
-    const [listOfUsers, setListOfUsers] = useState([])
+    const [onlyFriends, setonlyFriends] = useState(true)
+    const [listOfFriends, setListOfFriends] = useState([
+        {
+            name: 'Ding Dong',
+            birthday: '23/08/1999',
+            eventsCreated: [{ name: 'event1' }, { name: 'event2' }],
+            userId: 0
+        },
+        {
+            name: 'Ding Dong 2',
+            birthday: '23/08/1999',
+            eventsCreated: [],
+            userId: 1
+        },
+        {
+            name: 'Ding Dong 3',
+            birthday: '23/08/1999',
+            eventsCreated: [],
+            userId: 2
+        }
+    ])
+    const [listOfUsers, setListOfUsers] = useState([
+        {
+            name: 'Ding Dong',
+            birthday: '23/08/1999',
+            eventsCreated: [{ name: 'event1' }, { name: 'event2' }],
+            userId: 0
+        },
+        {
+            name: 'Ding Dong 2',
+            birthday: '23/08/1999',
+            eventsCreated: [],
+            userId: 1
+        },
+        {
+            name: 'Ding Dong 3',
+            birthday: '23/08/1999',
+            eventsCreated: [],
+            userId: 2
+        },
+        {
+            name: 'User 4',
+            birthday: '23/08/1999',
+            eventsCreated: [],
+            userId: 3
+        },
+        {
+            name: 'User 5',
+            birthday: '23/08/1999',
+            eventsCreated: [],
+            userId: 4
+        },
+    ])
+    const [filteredList, setfilteredList] = useState([])
+
 
     // each friend object should contain Name, Birthday, EventsCreated, Photo (if time permits)
 
-    useEffect(() => {
-        setListOfFriends([
-            {
-                name: 'Ding Dong',
-                birthday: '23/08/1999',
-                events_created: []
-            },
-            {
-                name: 'Ding Dong 2',
-                birthday: '23/08/1999',
-                events_created: []
-            },
-            {
-                name: 'Ding Dong 2',
-                birthday: '23/08/1999',
-                events_created: []
-            }
-        ])
-    }, [])
+    // useEffect(() => {
+    //     console.log('Stimulate Get Friend List')
+    //     setListOfFriends([
+    //         {
+    //             name: 'Ding Dong',
+    //             birthday: '23/08/1999',
+    //             eventsCreated: [{name: 'event1'}, {name: 'event2'}]
+    //         },
+    //         {
+    //             name: 'Ding Dong 2',
+    //             birthday: '23/08/1999',
+    //             eventsCreated: []
+    //         },
+    //         {
+    //             name: 'Ding Dong 3',
+    //             birthday: '23/08/1999',
+    //             eventsCreated: []
+    //         }
+    //     ])
+    // }, [])
 
+    useEffect(() => {
+        // console.log('in useEffect')
+
+        // BUG: Don't know why cannot fetch latest state set by other useEffect
+
+        let filteredList = listOfUsers
+        if (searchWords.trim() !== "") {
+            filteredList = listOfUsers.filter(user => {
+                return user.name.toLowerCase().includes(searchWords.trim().toLowerCase())
+            })
+        }
+        setfilteredList(filteredList)
+        setSelectedUserId(null)
+    }, [searchWords])
+
+    useEffect(() => {
+        // console.log('in setonlyfriends')
+        if (searchWords.trim() === "") {
+            setonlyFriends(true)
+        } else {
+            setonlyFriends(false)
+        }
+    }, [searchWords])
 
     // TODO: Get friends list
 
@@ -84,13 +162,62 @@ const FriendsPage = () => {
     //         .catch((err) => console.log(err));
     // };
 
-    const handleClickFriend = () => {
-        return null
+    const handleClickFriend = (index) => {
+        setSelectedUserId(index)
     }
 
-    // const getFriendName = () => {
-    //     return 'Hello'
-    // }
+    const handleTyping = (searchWords) => {
+        setSearchWords(searchWords)
+    }
+
+    const getFriendDetails = () => {
+        console.log('in friendDetails')
+        let userObj = listOfUsers[selectedUserId]
+        let isFriend = false
+        let friendCheck = listOfFriends.filter(friend => friend.userId === selectedUserId)
+        if (friendCheck.length === 1) {
+            isFriend = true
+        }
+
+        console.log(userObj)
+        let eventsCreated = userObj.eventsCreated
+        return (
+            <>
+                <div className="friendDetailsCardName">{userObj.name}</div>
+                <div>Birthday: {userObj.birthday}</div>
+                {isFriend &&
+                <>
+                <div>Events Created: {eventsCreated.length === 0 && '-'}</div>
+                <ul style={{ padding: 0 }}>
+                    {eventsCreated &&
+                        eventsCreated.map((item, index) => (
+                            <div key={index} className="wishlist-item-element">
+                                <div
+                                    style={{
+                                        flexDirection: "row",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                    }}
+                                >
+                                    <div
+                                        className="friend-item-btn"
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={faCircle}
+                                            color={COLORS[index]}
+                                            style={{ marginRight: 20 }}
+                                        />
+                                        <div>{item.name}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                </ul>
+                </>
+                }
+            </>
+        )
+    }
 
     const numOfFriends = listOfFriends.length;
 
@@ -102,37 +229,39 @@ const FriendsPage = () => {
                 <div className="friends-page">
                     <div className="friends-left-container">
                         <div className="searchBarContainer">
-                            <SearchBar />
+                            <SearchBar
+                                setKeyword={handleTyping}
+                            />
                         </div>
                         <div className="friendsContainer">
-                            <div className="card-mini-header">{numOfFriends} Friends</div>
-                            <ul style={{ padding: 0, overflow: 'scroll', marginBottom: 0 }}>
-                                {listOfFriends && listOfFriends.map((item, index) => (
+                            {onlyFriends && <div className="card-mini-header">{numOfFriends} Friends</div>}
+                            {!onlyFriends && <div className="card-mini-header">Users with name matching '{searchWords}':</div>}
+                            <ul style={{ padding: 0, overflowY: 'scroll', marginBottom: 0 }}>
+                                {onlyFriends && listOfFriends && listOfFriends.map((item, index) => (
                                     <div key={index} className="friend-item-element">
-                                        <button className="friend-item-btn" onClick={() => handleClickFriend(index)}>
+                                        <button className="friend-item-btn" onClick={() => handleClickFriend(item.userId)}>
+                                            {index + 1}: {item.name}
+                                        </button>
+                                    </div>
+                                ))}
+                                {!onlyFriends && filteredList && filteredList.map((item, index) => (
+                                    <div key={index} className="friend-item-element">
+                                        <button className="friend-item-btn" onClick={() => handleClickFriend(item.userId)}>
                                             {index + 1}:{item.name}
                                         </button>
                                     </div>
                                 ))}
                             </ul>
-                            {/* <div className="wishlists-container">
-                <div style={{ flexDirection: "row", display: "flex", justifyContent: 'space-between' }}>
-                <div>My Upcoming Events</div>
-                <button className="add-wishlist-btn" onClick={() => navigate("/events")}>
-                    <FontAwesomeIcon icon={faPlus} />
-                </button>
-                </div>
-            </div> */}
                         </div>
                     </div>
                     <div className="profileDetails">
                         <div className="friendsContainer maxWidth">
                             <div className="friend-details-card">
-                                {/* {listOfFriends && selectedFriendIndex && listOfFriends[selectedFriendIndex]} */}
-                                {listOfFriends == null || selectedFriendIndex == null &&
+                                {filteredList && selectedUserId != null && getFriendDetails()}
+                                {filteredList == null || selectedUserId == null &&
                                     <div className="friendNotSelectedContainer centerText">
                                         <div>
-                                        Select a friend to view his/her details.
+                                            Select a friend to view his/her details.
                                         </div>
                                     </div>
                                 }
