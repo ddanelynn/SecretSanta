@@ -9,7 +9,7 @@ export const HomePage = () => {
         {
             name: "Tasha's Birthday", 
             creator: "Tasha", 
-            participants: ["User1", "Danelynn"], 
+            participants: ["User1", "Danelynn", "Tasha"], 
             joinStatus: true, 
             date: "19", 
             month: "January"

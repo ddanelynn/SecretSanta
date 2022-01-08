@@ -17,9 +17,12 @@ export const EventCard = ({ event }) => {
 
     const handleClick = () => {
         if (joinState) {
+            const index = participants.indexOf(creator);
+            participants.splice(index, 1);
             setJoinState(false);
             // update joinstatus in backend
         } else {
+            participants.push(creator);
             setJoinState(true);
             // update joinstatus in backend
         }

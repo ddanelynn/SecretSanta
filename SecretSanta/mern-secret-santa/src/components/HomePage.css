@@ -48,6 +48,7 @@
     background-color: #9EB98E;
     padding: 10px 15px;
     margin-right: 8px;
+    white-space: nowrap;
 }
 .event-joined {
     width: 90%;
