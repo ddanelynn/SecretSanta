@@ -105,7 +105,7 @@
   margin-top: 20px;
   margin-bottom: 50px;
   width: 350px;
-  max-height: 400px;
+  max-height: 300px;
   scroll-behavior: smooth;
   overflow: scroll;
   scrollbar-width: none;
@@ -118,5 +118,5 @@
 }
 .category-image {
   width: 20%;
-  height: 40%;
+  height: 25%;
 }
