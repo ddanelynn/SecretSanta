@@ -107,6 +107,7 @@ function BirthdayEventCreationPage(props) {
     }
   };
 
+  console.log(userLists)
 
   return (
     <div className="birthday-event-creation-container">

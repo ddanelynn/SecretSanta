@@ -27,7 +27,7 @@ export const SignInPage = (props) => {
         .then((res) => { 
           console.log(res.data)
           localStorage.setItem('login', true)
-          navigate('/home')
+          navigate('/profile')
           userRequest(res.data)
         })
         .catch((err) => setAuthFail(true));

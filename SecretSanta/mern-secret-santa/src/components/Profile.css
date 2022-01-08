@@ -114,7 +114,7 @@
 }
 .nav-bar {
   background-color: #dc594f;
-  height: 80px;
+  min-height: 80px;
   padding-right: 30px;
   padding-left: 60px;
   display: flex;
