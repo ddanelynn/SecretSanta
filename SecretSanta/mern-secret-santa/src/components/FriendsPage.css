@@ -66,10 +66,27 @@
     cursor: pointer;
     font-size: medium;
     padding: 0;
+    align-items: center;
 }
 
 .friendDetailsCardName {
     text-align: center;
     font-weight: bold;
     margin: 1rem 0rem;
+}
+
+.addFriendButton {
+    width: fit-content;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #9EB98E;
+    padding: 5px 10px;
+    font-size: small;
+}
+
+.addFriendButtonDiv {
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0;
+    cursor: pointer;
 }
