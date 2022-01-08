@@ -1,4 +1,4 @@
-import { faBell, faUserFriends, faHome, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faUserFriends, faHome, faUser, faSignOutAlt, faSign } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom';
 import "./Profile.css";
@@ -17,6 +17,10 @@ export const Navbar = () => {
 
     const goToFeed = () => {
         navigate('/home')
+    }
+
+    const goToSignOut = () => {
+        navigate('/logout')
     }
 
     return (
@@ -40,6 +44,10 @@ export const Navbar = () => {
                 <button className="nav-icons">
                 <FontAwesomeIcon icon={faBell} color='white' size="lg" style={{ marginRight: 10 }}/>
                 Notification
+                </button>
+                <button className="nav-icons" onClick={() => goToSignOut()}>
+                <FontAwesomeIcon icon={faSignOutAlt} color='white' size="lg" style={{ marginRight: 10 }}/>
+                Sign Out
                 </button>
             </div>
         </div>
