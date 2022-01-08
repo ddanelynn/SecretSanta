@@ -7,37 +7,29 @@ import { EventCard } from "./EventCard";
 export const HomePage = () => {
     const events = [
         {
-            name: "Jerry's Birthday", 
-            creator: "JerryBerry", 
-            participants: ["Ben", "Tom", "JerryTriplet"], 
+            name: "Tasha's Birthday", 
+            creator: "Tasha", 
+            participants: ["User1", "Danelynn"], 
+            joinStatus: true, 
+            date: "19", 
+            month: "January"
+        },
+        {
+            name: "Christmas", 
+            creator: "Ding Dong", 
+            participants: ["Danelynn"], 
             joinStatus: false, 
             date: "25", 
             month: "December"
         },
         {
-            name: "Jerry's Christmas", 
-            creator: "JerryBerries", 
-            participants: ["berry", "Tom", "JerryTriplet"], 
+            name: "Children's Day", 
+            creator: "Ding Dong", 
+            participants: ["Danelynn", "User1"], 
             joinStatus: true, 
             date: "20", 
-            month: "March"
-        },
-        {
-            name: "Jerry's Christmas", 
-            creator: "JerryBerries", 
-            participants: ["berry", "Tom", "JerryTriplet"], 
-            joinStatus: true, 
-            date: "20", 
-            month: "March"
-        },
-        {
-            name: "Jerry's Christmas", 
-            creator: "JerryBerries", 
-            participants: ["berry", "Tom", "JerryTriplet"], 
-            joinStatus: true, 
-            date: "20", 
-            month: "March"
-        },
+            month: "September"
+        }
     ]
 
     const eventCards = [];
