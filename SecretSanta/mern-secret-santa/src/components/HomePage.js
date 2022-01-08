@@ -9,7 +9,7 @@ export const HomePage = () => {
         {
             name: "Tasha's Birthday", 
             creator: "Tasha", 
-            participants: ["User1", "Danelynn", "Tasha"], 
+            participants: ["user1", "Danelynn", "Tasha"], 
             joinStatus: true, 
             date: "19", 
             month: "January"
@@ -25,10 +25,18 @@ export const HomePage = () => {
         {
             name: "Children's Day", 
             creator: "Ding Dong", 
-            participants: ["Danelynn", "User1"], 
+            participants: ["Danelynn", "user1"], 
             joinStatus: true, 
             date: "20", 
             month: "September"
+        },
+        {
+            name: "My 22nd Birthday", 
+            creator: "user1", 
+            participants: ["Danelynn", "Ding Dong", "Tasha"], 
+            joinStatus: false, 
+            date: "31", 
+            month: "January"
         }
     ]
 
