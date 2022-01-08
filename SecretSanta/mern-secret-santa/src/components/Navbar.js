@@ -11,8 +11,8 @@ export const Navbar = () => {
         navigate('/profile')
     }
 
-    const goToEvents = () => {
-        navigate('/events')
+    const goToFriends = () => {
+        navigate('/friends')
     }
 
     const goToFeed = () => {
@@ -33,9 +33,9 @@ export const Navbar = () => {
                 <FontAwesomeIcon icon={faUser} color='white' size="lg" style={{ marginRight: 10 }}/>
                 Profile
                 </button>
-                <button className="nav-icons" onClick={() => goToEvents()}>
+                <button className="nav-icons" onClick={() => goToFriends()}>
                 <FontAwesomeIcon icon={faCalendar} color='white' size="lg" style={{ marginRight: 10 }}/>
-                Events
+                Friends
                 </button>
                 <button className="nav-icons">
                 <FontAwesomeIcon icon={faBell} color='white' size="lg" style={{ marginRight: 10 }}/>
