@@ -20,19 +20,19 @@ const FriendsPage = () => {
     const [listOfFriends, setListOfFriends] = useState([
         {
             name: 'Ding Dong',
-            birthday: '23/08/1999',
+            birthday: '23/07/1999',
             eventsCreated: [{ name: 'event1' }, { name: 'event2' }],
             userId: 0
         },
         {
-            name: 'Ding Dong 2',
-            birthday: '23/08/1999',
+            name: 'Danelynn',
+            birthday: '21/05/2000',
             eventsCreated: [],
             userId: 1
         },
         {
-            name: 'Ding Dong 3',
-            birthday: '23/08/1999',
+            name: 'Tasha',
+            birthday: '19/01/2000',
             eventsCreated: [],
             userId: 2
         }
@@ -40,33 +40,39 @@ const FriendsPage = () => {
     const [listOfUsers, setListOfUsers] = useState([
         {
             name: 'Ding Dong',
-            birthday: '23/08/1999',
+            birthday: '23/07/1999',
             eventsCreated: [{ name: 'event1' }, { name: 'event2' }],
             userId: 0
         },
         {
-            name: 'Ding Dong 2',
-            birthday: '23/08/1999',
+            name: 'Danelynn',
+            birthday: '21/05/2000',
             eventsCreated: [],
             userId: 1
         },
         {
-            name: 'Ding Dong 3',
-            birthday: '23/08/1999',
+            name: 'Tasha',
+            birthday: '19/01/2000',
             eventsCreated: [],
             userId: 2
         },
         {
-            name: 'User 4',
-            birthday: '23/08/1999',
+            name: 'Tom',
+            birthday: '13/06/1999',
             eventsCreated: [],
             userId: 3
         },
         {
-            name: 'User 5',
-            birthday: '23/08/1999',
+            name: 'Timmy',
+            birthday: '30/05/1999',
             eventsCreated: [],
             userId: 4
+        },
+        {
+            name: 'Tricia',
+            birthday: '31/05/1998',
+            eventsCreated: [],
+            userId: 5
         },
     ])
     const [filteredList, setfilteredList] = useState([])
