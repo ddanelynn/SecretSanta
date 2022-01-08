@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./HomePage.css";
 import { connect } from "react-redux";
 
-export const EventCard = ({ event, userData }) => {
+function EventCard({ event, userData }) {
 
     const { name, creator, participants, joinStatus, date, month } = event;
 
@@ -25,6 +25,7 @@ export const EventCard = ({ event, userData }) => {
             setJoinState(false);
             // update joinstatus in backend
         } else {
+            console.log(username)
             participants.push(username);
             setJoinState(true);
             // update joinstatus in backend
@@ -66,4 +67,4 @@ const mapStateToProps = (state) => ({
     userData: state.user.payload,
   });
 
-  export default connect(mapStateToProps)(EventCard);
+export default connect(mapStateToProps)(EventCard);
