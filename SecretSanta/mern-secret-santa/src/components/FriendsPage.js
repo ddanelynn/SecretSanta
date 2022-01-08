@@ -78,10 +78,11 @@ const FriendsPage = () => {
             name: 'JerryTriplet',
             birthday: '21/05/1996',
             eventsCreated: [],
-            userId: 5
+            userId: 6
         },
     ])
     const [filteredList, setfilteredList] = useState([])
+    const [ addFriend, setAddFriend ] = useState(false)
 
 
     // each friend object should contain Name, Birthday, EventsCreated, Photo (if time permits)
@@ -176,10 +177,23 @@ const FriendsPage = () => {
 
     const handleClickFriend = (index) => {
         setSelectedUserId(index)
+        setAddFriend(false)
     }
 
     const handleTyping = (searchWords) => {
         setSearchWords(searchWords)
+    }
+
+    const handleAddFriend = () => {
+        setAddFriend(true)
+    }
+
+    const displayButtonText = () => {
+        if (addFriend) {
+            return 'Friend Request Sent'
+        } else {
+            return 'Send Friend Request'
+        }
     }
 
     const getFriendDetails = () => {
@@ -196,36 +210,50 @@ const FriendsPage = () => {
         return (
             <>
                 <div className="friendDetailsCardName">{userObj.name}</div>
+                {isFriend &&
+                    <div className="addFriendButtonDiv">
+                        <div className="addFriendButton">
+                            Friends ✓
+                        </div>
+                    </div>
+                }
+                {!isFriend &&
+                    <div className="addFriendButtonDiv">
+                        <div className="addFriendButton" onClick={() => handleAddFriend()}>
+                            {displayButtonText()}
+                        </div>
+                    </div>
+                }
                 <div>Birthday: {userObj.birthday}</div>
                 {isFriend &&
-                <>
-                <div>Events Created: {eventsCreated.length === 0 && '-'}</div>
-                <ul style={{ padding: 0 }}>
-                    {eventsCreated &&
-                        eventsCreated.map((item, index) => (
-                            <div key={index} className="friend-item-element">
-                                <div
-                                    style={{
-                                        flexDirection: "row",
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                    }}
-                                >
-                                    <div
-                                        className="friend-item-btn"
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={faCircle}
-                                            color={COLORS[index]}
-                                            style={{ marginRight: 20 }}
-                                        />
-                                        <div>{item.name}</div>
+                    <>
+                        <div>Events Created: {eventsCreated.length === 0 && '-'}</div>
+                        <ul style={{ padding: 0 }}>
+                            {eventsCreated &&
+                                eventsCreated.map((item, index) => (
+                                    <div key={index} className="friend-item-element">
+                                        <div
+                                            style={{
+                                                flexDirection: "row",
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                            }}
+                                        >
+                                            <div
+                                                className="friend-item-btn"
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faCircle}
+                                                    color={COLORS[index]}
+                                                    style={{ marginRight: 20 }}
+                                                />
+                                                <div>{item.name}</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
-                </ul>
-                </>
+                                ))}
+                        </ul>
+                    </>
                 }
             </>
         )
