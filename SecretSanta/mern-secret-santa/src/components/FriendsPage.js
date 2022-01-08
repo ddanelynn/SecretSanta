@@ -21,7 +21,7 @@ const FriendsPage = () => {
         {
             name: 'Ding Dong',
             birthday: '23/07/1999',
-            eventsCreated: [{ name: 'event1' }, { name: 'event2' }],
+            eventsCreated: [{ name: 'Christmas' }, { name: "Children's Day" }],
             userId: 0
         },
         {
@@ -33,7 +33,7 @@ const FriendsPage = () => {
         {
             name: 'Tasha',
             birthday: '19/01/2000',
-            eventsCreated: [],
+            eventsCreated: [{ name: "Tasha's Birthday" }],
             userId: 2
         }
     ])
@@ -71,6 +71,12 @@ const FriendsPage = () => {
         {
             name: 'Tricia',
             birthday: '31/05/1998',
+            eventsCreated: [],
+            userId: 5
+        },
+        {
+            name: 'JerryTriplet',
+            birthday: '21/05/1996',
             eventsCreated: [],
             userId: 5
         },
@@ -197,7 +203,7 @@ const FriendsPage = () => {
                 <ul style={{ padding: 0 }}>
                     {eventsCreated &&
                         eventsCreated.map((item, index) => (
-                            <div key={index} className="wishlist-item-element">
+                            <div key={index} className="friend-item-element">
                                 <div
                                     style={{
                                         flexDirection: "row",
