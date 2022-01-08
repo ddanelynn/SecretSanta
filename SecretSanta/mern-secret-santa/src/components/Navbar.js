@@ -1,4 +1,4 @@
-import { faBell, faCalendar, faHome, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faUserFriends, faHome, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom';
 import "./Profile.css";
@@ -34,7 +34,7 @@ export const Navbar = () => {
                 Profile
                 </button>
                 <button className="nav-icons" onClick={() => goToFriends()}>
-                <FontAwesomeIcon icon={faCalendar} color='white' size="lg" style={{ marginRight: 10 }}/>
+                <FontAwesomeIcon icon={faUserFriends} color='white' size="lg" style={{ marginRight: 10 }}/>
                 Friends
                 </button>
                 <button className="nav-icons">
