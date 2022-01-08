@@ -39,6 +39,7 @@ export const Navbar = () => {
                 </button>
                 <button className="nav-icons">
                 <FontAwesomeIcon icon={faBell} color='white' size="lg" style={{ marginRight: 10 }}/>
+                Notification
                 </button>
             </div>
         </div>
