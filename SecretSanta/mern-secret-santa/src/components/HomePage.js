@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./HomePage.css";
 import { Navbar } from "./Navbar";
-import { EventCard } from "./EventCard";
+import EventCard from "./EventCard";
 
 export const HomePage = () => {
     const events = [

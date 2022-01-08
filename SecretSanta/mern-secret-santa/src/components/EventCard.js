@@ -64,4 +64,4 @@ const mapStateToProps = (state) => ({
     userData: state.user.payload,
   });
 
-  export default connect(mapStateToProps)(EventCard);
+export default connect(mapStateToProps)(EventCard);
