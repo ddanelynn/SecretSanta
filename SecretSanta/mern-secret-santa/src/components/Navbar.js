@@ -22,7 +22,7 @@ export const Navbar = () => {
     return (
         <div className="nav-bar">
             <div className="app-name">
-            SugarDaddy
+            SecretSanta
             </div>
             <div>
                 <button className="nav-icons" onClick={() => goToFeed()}>
